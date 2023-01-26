@@ -3,10 +3,10 @@ from .abstracts import AbstractController, AbstractActor
 class KeyboardController(AbstractController):
     def __init__(self, _pyxel)->None:
         self._pyxel = _pyxel
-        self.actor = None
+        self.actor: AbstractActor
 
     def register(self, actor: AbstractActor)->None:
-        pass
+        self.actor = actor
 
     def update(self)->None:
         if not self.actor:
@@ -14,3 +14,4 @@ class KeyboardController(AbstractController):
 
         if self._pyxel.btn(self._pyxel.KEY_D): # type: ignore
             self.actor.move(1, 0)
+            print("D")
