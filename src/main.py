@@ -3,11 +3,11 @@ import os
 import sys
 
 class App:
-    def __init__(self)->None:
-        self._pyxel = PyxelFactory.create()
-        self._pyxel.init(128, 128)
-        self.keyboardInput = KeyboardController(self._pyxel)
-        self.player = Player(self.keyboardInput, self._pyxel)
+    def __init__(self, *args, **kwargs)->None:
+        self._pyxel = PyxelFactory.create(*args, **kwargs)
+        self._pyxel.init(420, 260)
+        self.keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
+        self.player = Player(self.keyboardInput, self._pyxel, *args, **kwargs)
         self._pyxel.load(resource_path("resources.pyxres"))
 
 
@@ -18,13 +18,14 @@ class App:
 
     def update(self)->None:
         self.player.update()
-        self.keyboardInput.update()
 
     def draw(self)->None:
         self._pyxel.cls(0)
         self.player.draw()
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
+
+# todo: move this to a utils module
 def resource_path(relative_path):
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:

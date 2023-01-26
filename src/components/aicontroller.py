@@ -1,7 +1,7 @@
 from .abstracts import AbstractController
 
 class AIController(AbstractController):
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         pass
 
     def register(self, actor) -> None:
