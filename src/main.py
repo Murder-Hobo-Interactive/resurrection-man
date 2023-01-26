@@ -1,13 +1,22 @@
-from components import KeyboardController, Player, PyxelFactory, constants as c
+from components import KeyboardController, AIController, Player, Enemy, PyxelFactory, constants as c
 import os
 import sys
 
 class App:
     def __init__(self, *args, **kwargs)->None:
+        # inversion of control of pyxel so that later
+        # it's easy to either fake it for testing
+        # or run headless as a game server
         self._pyxel = PyxelFactory.create(*args, **kwargs)
         self._pyxel.init(420, 260)
-        self.keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
-        self.player = Player(self.keyboardInput, self._pyxel, *args, **kwargs)
+
+        # make a player entity
+        keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
+        self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
+
+        # make an enemy entity
+        aiInput = AIController(*args, **kwargs)
+        self.enemy = Enemy(aiInput, self._pyxel, *args, **kwargs)
         self._pyxel.load(resource_path("resources.pyxres"))
 
 

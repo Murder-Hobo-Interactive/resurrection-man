@@ -2,8 +2,14 @@ import typing
 from .abstracts import AbstractActor, AbstractController
 
 class Enemy(AbstractActor):
+    U = 16
+    V = 0
     def __init__(self, controller:AbstractController, view: typing.Any, *args, **kwargs):
-        pass
+        self.controller = controller
+        self.controller.register(self)
+        self.x = 24
+        self.y = 24
+        self.view = view
 
     def update(self)->None:
         pass

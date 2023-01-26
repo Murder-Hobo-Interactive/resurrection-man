@@ -10,7 +10,7 @@ class AbstractActor(Base):
     V = 0
     w = Base.BASE_BLOCK
     h = Base.BASE_BLOCK
-    def __init__(self, controller, view, *args, **kwargs)->None:  # type: ignore
+    def __init__(self, controller=None, view=None, *args, **kwargs)->None:  # type: ignore
         self.controller = controller
         self.view = view
         self.x = 0
