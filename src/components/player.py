@@ -11,6 +11,10 @@ class Player(AbstractActor):
         self.y = 0
 
     def move(self, x:int, y:int)->None:
+        self.x += x
+        self.y += y
+    
+    def move_to(self, x:int, y:int)->None:
         self.x = x
         self.y = y
 

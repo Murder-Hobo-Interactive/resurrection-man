@@ -13,6 +13,10 @@ class AbstractActor(Base):
     @abstractmethod
     def move(self, x: int, y: int)->None:
         pass
+    
+    @abstractmethod
+    def move_to(self, x: int, y: int)->None:
+        pass
 
     @abstractmethod
     def update(self)->None:
@@ -25,4 +29,8 @@ class AbstractActor(Base):
 class AbstractController(Base):
     @abstractmethod
     def register(self, actor)->None: # type: ignore
+        pass
+
+    @abstractmethod
+    def update(self)->None:
         pass
