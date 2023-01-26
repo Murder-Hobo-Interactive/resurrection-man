@@ -9,7 +9,6 @@ class App:
         self.keyboardInput = KeyboardController(self._pyxel)
         self.player = Player(self.keyboardInput, self._pyxel)
         self._pyxel.load(resource_path("resources.pyxres"))
-        print(sys.path)
 
         self._pyxel.run(self.update, self.draw)
         
@@ -21,8 +20,6 @@ class App:
     def draw(self)->None:
         self._pyxel.cls(0)
         self.player.draw()
-        c.pyxel.blt(0, 0, 0, 0, 0, 16, 16, 0)
-
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
 def resource_path(relative_path):

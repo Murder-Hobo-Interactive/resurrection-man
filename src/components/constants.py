@@ -1,0 +1,1 @@
+import pyxel # type: ignore

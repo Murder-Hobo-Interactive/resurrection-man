@@ -12,6 +12,12 @@ class KeyboardController(AbstractController):
         if not self.actor:
             return
 
+        if self._pyxel.btn(self._pyxel.KEY_W): # type: ignore
+            self.actor.move(0, -1)
+        if self._pyxel.btn(self._pyxel.KEY_A): # type: ignore
+            self.actor.move(-1, 0)
+        if self._pyxel.btn(self._pyxel.KEY_S): # type: ignore
+            self.actor.move(0, 1)
         if self._pyxel.btn(self._pyxel.KEY_D): # type: ignore
             self.actor.move(1, 0)
-            print("D")
+        
