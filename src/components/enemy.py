@@ -1,6 +1,7 @@
 from typing import Any
 from .abstracts import AbstractActor, AbstractController
 from .aicontroller import AIController
+from .types import Args, Kwargs
 
 
 class Enemy(AbstractActor):
@@ -8,11 +9,7 @@ class Enemy(AbstractActor):
     V = 0
 
     def __init__(
-        self,
-        controller: AbstractController,
-        view: Any,
-        *args: tuple[Any],
-        **kwargs: dict[str, Any]
+        self, controller: AbstractController, view: Any, *args: Args, **kwargs: Kwargs
     ):
         self.controller = controller
         self.controller.register(self)
@@ -26,7 +23,7 @@ class Enemy(AbstractActor):
 
 class EnemyFactory:
     @classmethod
-    def create(cls, _pyxel: Any, *args: tuple[Any], **kwargs: dict[str, Any]) -> Enemy:
+    def create(cls, _pyxel: Any, *args: Args, **kwargs: Kwargs) -> Enemy:
         aiInput = AIController(*args, **kwargs)
         return Enemy(aiInput, _pyxel, *args, **kwargs)
 

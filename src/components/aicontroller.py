@@ -1,9 +1,10 @@
 from typing import Any
 from .abstracts import AbstractController, AbstractActor
+from .types import Args, Kwargs
 
 
 class AIController(AbstractController):
-    def __init__(self, *args: tuple[Any], **kwargs: dict[str, Any]):
+    def __init__(self, *args: Args, **kwargs: Kwargs):
         pass
 
     def register(self, actor: AbstractActor) -> None:

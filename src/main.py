@@ -5,13 +5,15 @@ from components import (
     PyxelFactory,
     EnemyFactory,
     constants as c,
+    Args,
+    Kwargs,
 )
 import os
 import sys
 
 
 class App:
-    def __init__(self, *args: tuple[Any], **kwargs: dict[str, Any]) -> None:
+    def __init__(self, *args: Args, **kwargs: Kwargs) -> None:
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server

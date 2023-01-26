@@ -1,5 +1,6 @@
 from typing import Any
 from .abstracts import AbstractActor, AbstractController
+from .types import Args, Kwargs
 
 
 class Player(AbstractActor):
@@ -9,11 +10,7 @@ class Player(AbstractActor):
     h = 16
 
     def __init__(
-        self,
-        controller: AbstractController,
-        view: Any,
-        *args: tuple[Any],
-        **kwargs: dict[str, Any]
+        self, controller: AbstractController, view: Any, *args: Args, **kwargs: Kwargs
     ) -> None:
         self.controller = controller
         self.controller.register(self)

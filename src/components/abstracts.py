@@ -1,5 +1,6 @@
 from typing import Any
 from abc import ABC, abstractmethod
+from .types import Args, Kwargs
 
 
 class Base(ABC):
@@ -14,11 +15,7 @@ class AbstractActor(Base):
     h = Base.BASE_BLOCK
 
     def __init__(
-        self,
-        controller: Any = None,
-        view: Any = None,
-        *args: tuple[Any],
-        **kwargs: dict[str, Any]
+        self, controller: Any = None, view: Any = None, *args: Args, **kwargs: Kwargs
     ) -> None:
         self.controller = controller
         self.view = view

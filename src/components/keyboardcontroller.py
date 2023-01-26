@@ -1,11 +1,10 @@
 from typing import Any
 from .abstracts import AbstractController, AbstractActor
+from .types import Args, Kwargs
 
 
 class KeyboardController(AbstractController):
-    def __init__(
-        self, _pyxel: Any, *args: tuple[Any], **kwargs: dict[str, Any]
-    ) -> None:
+    def __init__(self, _pyxel: Any, *args: Args, **kwargs: Kwargs) -> None:
         self._pyxel = _pyxel
         self.actor: AbstractActor
 
