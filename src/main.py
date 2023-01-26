@@ -10,6 +10,9 @@ class App:
         self.player = Player(self.keyboardInput, self._pyxel)
         self._pyxel.load(resource_path("resources.pyxres"))
 
+
+        # --------------------
+        # leave this at the end of init (nothing under it will run)
         self._pyxel.run(self.update, self.draw)
         
 
