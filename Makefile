@@ -6,3 +6,6 @@ edit:
 
 types:
 	pipenv run mypy --strict --implicit-reexport src
+
+format:
+	pipenv run black .

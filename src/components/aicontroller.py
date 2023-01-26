@@ -1,6 +1,7 @@
 from typing import Any
 from .abstracts import AbstractController, AbstractActor
 
+
 class AIController(AbstractController):
     def __init__(self, *args: tuple[Any], **kwargs: dict[str, Any]):
         pass
@@ -14,8 +15,9 @@ class AIController(AbstractController):
 
 class AIControllerFactory:
     @classmethod
-    def create(cls)->AIController:
+    def create(cls) -> AIController:
         return AIController()
+
 
 if __name__ == "__main__":
     AI = AIController()
