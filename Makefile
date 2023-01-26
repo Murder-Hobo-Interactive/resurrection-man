@@ -1,14 +1,14 @@
 run:
-	pipenv run python src/main.py
+	python -m pipenv run python src/main.py
 
 edit:
-	pipenv run pyxel edit src/resources.pyxres
+	python -m pipenv run pyxel edit src/resources.pyxres
 
 types:
-	pipenv run mypy --strict --implicit-reexport src
+	python -m pipenv run mypy --strict --implicit-reexport src
 
 format:
-	pipenv run black .
+	python -m pipenv run black .
 
 uml:
-	pipenv run pyreverse -o png src/*.py src/components/*.py
+	python -m pipenv run pyreverse -o png src/*.py src/components/*.py
