@@ -9,7 +9,17 @@ grave robbing and other fun things
 # getting started
 *install the dependencies listed above*
 
-`pipenv install`
+make sure that `python` is a valid command
+
+if not set alias in `.bashrc` and run `source ~/.bashrc`
+
+*set alias in `.bashrc`*
+
+`alias python='python3'`
+
+*install and run*
+
+`python -m pipenv install`
 
 `make run`
 
