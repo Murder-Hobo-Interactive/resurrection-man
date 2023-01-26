@@ -7,6 +7,8 @@ grave robbing and other fun things
 [pipenv](https://pipenv.pypa.io/en/latest/)
 
 # getting started
+*install the dependencies listed above*
+
 `pipenv install`
 
 `make run`
