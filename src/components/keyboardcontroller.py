@@ -1,5 +1,4 @@
-from .abstractcontroller import AbstractController
-from .abstractactor import AbstractActor
+from .abstracts import AbstractController, AbstractActor
 
 class KeyboardController(AbstractController):
     def __init__(self)->None:

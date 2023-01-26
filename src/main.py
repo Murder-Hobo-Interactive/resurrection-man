@@ -1,11 +1,11 @@
-import pyxel  # type: ignore
-from components import keyboardcontroller, player
+import pyxel
+from components import KeyboardController, Player
 class App:
     def __init__(self)->None:
         pyxel.init(800, 600)
+        keyboardInput = KeyboardController()
+        self.player = Player(keyboardInput)
         pyxel.run(self.update, self.draw)
-        keyboardInput = keyboardcontroller()
-        self.player = player(keyboardInput)
 
     def update(self)->None:
         self.player.update()

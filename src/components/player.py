@@ -1,5 +1,4 @@
-from .abstractactor import AbstractActor
-from .abstractcontroller import AbstractController
+from .abstracts import AbstractActor, AbstractController
 
 class Player(AbstractActor):
     U = 0
@@ -15,8 +14,8 @@ class Player(AbstractActor):
         self.x = x
         self.y = y
 
-    def update(self):
+    def update(self)->None:
         pass
 
-    def draw(self):
+    def draw(self)->None:
         pass

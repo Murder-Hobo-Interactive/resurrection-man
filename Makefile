@@ -5,4 +5,4 @@ edit:
 	pipenv run pyxel edit src/resources.pyxres
 
 types:
-	pipenv run mypy --strict src
+	pipenv run mypy --strict --implicit-reexport src
