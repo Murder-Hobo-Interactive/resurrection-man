@@ -19,3 +19,20 @@ grave robbing and other fun things
 
 *this is not currently used as a check for anything*
 
+# uml
+`make uml`
+
+might require graphviz
+
+`brew install graphviz`
+
+or
+
+`apt-get install graphviz`
+
+
+## Packages
+![packages uml](./packages.png)
+
+## Classes
+![classes uml](./classes.png)

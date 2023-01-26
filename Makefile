@@ -9,3 +9,6 @@ types:
 
 format:
 	pipenv run black .
+
+uml:
+	pipenv run pyreverse -o png src/*.py src/components/*.py
