@@ -17,8 +17,6 @@ grave robbing and other fun things
 # type checking
 `make types`
 
-*this is not currently used as a check for anything*
-
 # uml
 `make uml`
 
