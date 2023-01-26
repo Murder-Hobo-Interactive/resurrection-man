@@ -11,3 +11,11 @@ grave robbing and other fun things
 
 `make run`
 
+# editing assets
+`make edit`
+
+# type checking
+`make types`
+
+*this is not currently used as a check for anything*
+

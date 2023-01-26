@@ -1,9 +1,10 @@
+from typing import Any
 from components import KeyboardController, Player, PyxelFactory, EnemyFactory, constants as c
 import os
 import sys
 
 class App:
-    def __init__(self, *args, **kwargs)->None:
+    def __init__(self, *args: tuple[Any], **kwargs: dict[str, Any])->None:
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server
@@ -26,21 +27,24 @@ class App:
 
     def update(self)->None:
         self.player.update()
-        [x.update() for x in self.gameObjects]  # run update on all game objects
+        for x in self.gameObjects:
+            x.update()
 
     def draw(self)->None:
         self._pyxel.cls(0)
         self.player.draw()
-        [x.draw() for x in self.gameObjects]  # run draw on all game objects
+        for x in self.gameObjects:
+            x.draw()
+
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
 
 # todo: move this to a utils module
-def resource_path(relative_path):
+def resource_path(relative_path: str)->str:
     """ Get absolute path to resource, works for dev and for PyInstaller """
     try:
         # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS
+        base_path = sys._MEIPASS # type: ignore
     except Exception:
         base_path = os.path.abspath(".")
 
