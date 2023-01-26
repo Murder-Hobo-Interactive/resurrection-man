@@ -27,10 +27,12 @@ class App:
 
     def update(self)->None:
         self.player.update()
+        self.enemy.update()
 
     def draw(self)->None:
         self._pyxel.cls(0)
         self.player.draw()
+        self.enemy.draw()
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
 

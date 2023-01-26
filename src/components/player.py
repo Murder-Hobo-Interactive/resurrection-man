@@ -17,5 +17,5 @@ class Player(AbstractActor):
         self.controller.update()
 
     def draw(self)->None:
-        self.view.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 0)
+        self.view.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
 
