@@ -1,3 +1,4 @@
+from typing import Any
 from abc import ABC, abstractmethod
 
 
@@ -12,7 +13,13 @@ class AbstractActor(Base):
     w = Base.BASE_BLOCK
     h = Base.BASE_BLOCK
 
-    def __init__(self, controller=None, view=None, *args, **kwargs) -> None:  # type: ignore
+    def __init__(
+        self,
+        controller: Any = None,
+        view: Any = None,
+        *args: tuple[Any],
+        **kwargs: dict[str, Any]
+    ) -> None:
         self.controller = controller
         self.view = view
         self.x = 0
