@@ -2,13 +2,20 @@ from abc import ABC, abstractmethod
 
 
 class Base(ABC):
-    # This is just here to be a base class
+    BASE_BLOCK = 16
     pass
 
 class AbstractActor(Base):
-    @abstractmethod
-    def __init__(self, controller)->None:  # type: ignore
-        pass
+    U = 0
+    V = 0
+    w = Base.BASE_BLOCK
+    h = Base.BASE_BLOCK
+    def __init__(self, controller, view)->None:  # type: ignore
+        self.controller = controller
+        self.view = view
+        self.x = 0
+        self.y = 0
+
 
     @abstractmethod
     def move(self, x: int, y: int)->None:
@@ -22,9 +29,9 @@ class AbstractActor(Base):
     def update(self)->None:
         pass
 
-    @abstractmethod
     def draw(self)->None:
-        pass
+        self.view.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
+
 
 class AbstractController(Base):
     @abstractmethod
