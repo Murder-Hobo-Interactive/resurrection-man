@@ -1,4 +1,4 @@
-from components import KeyboardController, AIController, Player, Enemy, PyxelFactory, constants as c
+from components import KeyboardController, Player, PyxelFactory, EnemyFactory, constants as c
 import os
 import sys
 
@@ -14,11 +14,10 @@ class App:
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
         self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
 
-        # make an enemy entity
-        aiInput = AIController(*args, **kwargs)
-        self.enemy = Enemy(aiInput, self._pyxel, *args, **kwargs)
+        self.gameObjects = []
+        self.gameObjects.append(EnemyFactory.create(self._pyxel, *args, **kwargs))  # todo: put this in a populate method
+        
         self._pyxel.load(resource_path("resources.pyxres"))
-
 
         # --------------------
         # leave this at the end of init (nothing under it will run)
@@ -27,12 +26,12 @@ class App:
 
     def update(self)->None:
         self.player.update()
-        self.enemy.update()
+        [x.update() for x in self.gameObjects]  # run update on all game objects
 
     def draw(self)->None:
         self._pyxel.cls(0)
         self.player.draw()
-        self.enemy.draw()
+        [x.draw() for x in self.gameObjects]  # run draw on all game objects
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
 

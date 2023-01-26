@@ -1,5 +1,6 @@
 import typing
 from .abstracts import AbstractActor, AbstractController
+from .aicontroller import AIController
 
 class Enemy(AbstractActor):
     U = 16
@@ -14,6 +15,11 @@ class Enemy(AbstractActor):
     def update(self)->None:
         pass
 
+class EnemyFactory:
+    @classmethod
+    def create(cls, _pyxel, *args, **kwargs):
+        aiInput = AIController(*args, **kwargs)
+        return Enemy(aiInput, _pyxel, *args, **kwargs)
 
 if __name__ == "__main__":
     # this acts as a minimal test mostly to catch any type errors more easily
