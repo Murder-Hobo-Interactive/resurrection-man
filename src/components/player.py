@@ -13,14 +13,6 @@ class Player(AbstractActor):
         self.y = 10
         self.view = view
 
-    def move(self, x:int, y:int)->None:
-        self.x += x
-        self.y += y
-    
-    def move_to(self, x:int, y:int)->None:
-        self.x = x
-        self.y = y
-
     def update(self)->None:
         pass
 

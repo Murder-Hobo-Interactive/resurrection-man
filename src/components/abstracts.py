@@ -17,13 +17,13 @@ class AbstractActor(Base):
         self.y = 0
 
 
-    @abstractmethod
-    def move(self, x: int, y: int)->None:
-        pass
+    def move(self, x:int, y:int)->None:
+        self.x += x
+        self.y += y
     
-    @abstractmethod
-    def move_to(self, x: int, y: int)->None:
-        pass
+    def move_to(self, x:int, y:int)->None:
+        self.x = x
+        self.y = y
 
     @abstractmethod
     def update(self)->None:
