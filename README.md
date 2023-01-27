@@ -7,6 +7,7 @@ grave robbing and other fun things
 [pipenv](https://pipenv.pypa.io/en/latest/)
 
 `python -m pip install pipenv`
+(This installs pip which will later be used to set up pipenv. Try not to confuse the commands via terminal history like amp did)
 
 [make](https://www.technewstoday.com/install-and-use-make-in-windows/)
 
@@ -17,6 +18,9 @@ don't forget to add make to the path in windows. example: `C:\Program Files (x86
 *on a real OS this isn't a problem, but on windows you gotta use gnumake*
 
 # getting started
+
+WSL causes more problems than its worth, use native dev tools if you're using Windows. [See this issue](https://github.com/Murder-Hobo-Interactive/resurrection-man/issues/15)
+
 *install the dependencies listed above*
 
 make sure that `python` is a valid command
