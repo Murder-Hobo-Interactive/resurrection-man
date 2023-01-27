@@ -1,5 +1,6 @@
 from typing import Any
 from abc import ABC, abstractmethod
+from collections.abc import Callable
 from .types import Args, Kwargs
 from .utils import clamp
 
@@ -19,7 +20,7 @@ class AbstractActor(Base):
 
     def __init__(
         self,
-        controller: Any = None,  # figure out how to change this Any to AbstractController
+        controller: Any = None,  # todo: figure out how to change this Any to AbstractController
         view: Any = None,
         *args: Args,
         **kwargs: Kwargs
@@ -64,6 +65,10 @@ class AbstractFiniteStateMachine(Base):
     ) -> None:
         self.wait = wait  # todo: I think this needs a better name
         self.actor = actor
+
+    @abstractmethod
+    def state_start(self) -> Callable[[Any], Callable[[Any], Any]]:
+        ...
 
     @abstractmethod
     def update(self) -> None:
