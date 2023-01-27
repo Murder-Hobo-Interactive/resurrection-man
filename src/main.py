@@ -24,7 +24,7 @@ class App:
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
         self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
 
-        self.gameObjects = []
+        self.gameObjects = []  # todo: this will eventually get moved to scenes objects
         self.gameObjects.append(
             EnemyFactory.create(self._pyxel, *args, **kwargs)
         )  # todo: put this in a populate method

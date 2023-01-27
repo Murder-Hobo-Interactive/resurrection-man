@@ -9,6 +9,7 @@ mypy = "*"
 black = "*"
 pylint = "*"
 pre-commit = "*"
+colorama = "*"
 
 [dev-packages]
 
