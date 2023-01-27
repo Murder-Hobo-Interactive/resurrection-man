@@ -56,3 +56,17 @@ class AbstractController(Base):
     @abstractmethod
     def update(self) -> None:
         ...
+
+
+class AbstractFiniteStateMachine(Base):
+    def __init__(self, wait: int, *args: Args, **kwargs: Kwargs) -> None:
+        self.wait = wait
+        self.actor: AbstractActor
+
+    @abstractmethod
+    def registerActor(self, actor: AbstractActor) -> None:
+        ...
+
+    @abstractmethod
+    def update(self) -> None:
+        ...
