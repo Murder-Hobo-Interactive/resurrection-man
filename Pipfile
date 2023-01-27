@@ -5,6 +5,11 @@ name = "pypi"
 
 [packages]
 pyxel = "*"
+mypy = "*"
+black = "*"
+pylint = "*"
+pre-commit = "*"
+colorama = "*"
 
 [dev-packages]
 
