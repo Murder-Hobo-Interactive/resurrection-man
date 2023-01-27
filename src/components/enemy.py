@@ -29,6 +29,7 @@ class EnemyFactory:
     @classmethod
     def create(cls, _pyxel: Any, *args: Args, **kwargs: Kwargs) -> Enemy:
         aiInput = AIController(*args, **kwargs)
+        # aiInput.register()
         return Enemy(aiInput, _pyxel, *args, **kwargs)
 
 
