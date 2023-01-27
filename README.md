@@ -6,6 +6,14 @@ grave robbing and other fun things
 
 [pipenv](https://pipenv.pypa.io/en/latest/)
 
+`python -m pip install pipenv`
+
+[make](https://www.technewstoday.com/install-and-use-make-in-windows/)
+
+`winget install gnuwin32.make`
+
+*on a real OS this isn't a problem, but on windows you gotta use gnumake*
+
 # getting started
 *install the dependencies listed above*
 
