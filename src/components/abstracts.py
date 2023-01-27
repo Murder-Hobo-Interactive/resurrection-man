@@ -51,7 +51,7 @@ class AbstractActor(Base):
 
 
 class AbstractController(Base):
-    def register(self, actor: AbstractActor) -> None:
+    def register(self, actor: AbstractActor, *args: Args, **kwargs: Kwargs) -> None:
         self.actor = actor
 
     @abstractmethod

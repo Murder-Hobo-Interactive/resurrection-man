@@ -4,6 +4,14 @@ from .aicontroller import AIController
 from .types import Args, Kwargs
 
 
+class BasicEnemyFSM(AbstractFiniteStateMachine):
+    def state_start(self) -> None:
+        return super().state_start()
+
+    def update(self) -> None:
+        return super().update()
+
+
 class Enemy(AbstractActor):
     U = 16
     V = 0
@@ -12,21 +20,14 @@ class Enemy(AbstractActor):
         self, controller: AbstractController, view: Any, *args: Args, **kwargs: Kwargs
     ):
         self.controller = controller
-        self.controller.register(self)
+        b_fsm = BasicEnemyFSM(30)
+        self.controller.register(self, fsm=b_fsm)
         self.x = 24
         self.y = 24
         self.view = view
 
     def update(self) -> None:
         pass
-
-
-class BasicEnemyFSM(AbstractFiniteStateMachine):
-    def state_start(self) -> None:
-        return super().state_start()
-
-    def update(self) -> None:
-        return super().update()
 
 
 class EnemyFactory:
@@ -42,12 +43,9 @@ if __name__ == "__main__":
     from .keyboardcontroller import KeyboardController
     from .pyxelfactory import PyxelFactory
 
-    v = PyxelFactory.create
+    v = PyxelFactory.create()
     c = KeyboardController(v)
     e = Enemy(c, v)
 
-if __name__ == "__main__":
-    e = Enemy()
-    b_fsm = BasicEnemyFSM(30)
     ai_c = AIController()
-    ai_c.register(actor=e, fsm=b_fsm)
+    e = Enemy(ai_c, v)
