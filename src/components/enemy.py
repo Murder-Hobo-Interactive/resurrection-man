@@ -21,8 +21,12 @@ class Enemy(AbstractActor):
         pass
 
 
-class EnemyFSM(AbstractFiniteStateMachine):
-    ...
+class BasicEnemyFSM(AbstractFiniteStateMachine):
+    def state_start(self) -> None:
+        return super().state_start()
+
+    def update(self) -> None:
+        return super().update()
 
 
 class EnemyFactory:
@@ -41,3 +45,9 @@ if __name__ == "__main__":
     v = PyxelFactory.create
     c = KeyboardController(v)
     e = Enemy(c, v)
+
+if __name__ == "__main__":
+    e = Enemy()
+    b_fsm = BasicEnemyFSM(30)
+    ai_c = AIController()
+    ai_c.register(actor=e, fsm=b_fsm)
