@@ -34,8 +34,8 @@ class AbstractActor(Base):
         self.y = y
 
     def move_toward(self, x: int, y: int, speed: int) -> None:
-        self.x += clamp(x - self.x, -1 * speed, speed)
-        self.y += clamp(y - self.y, -1 * speed, speed)
+        self.x += int(clamp(x - self.x, -1 * speed, speed))
+        self.y += int(clamp(y - self.y, -1 * speed, speed))
 
     @abstractmethod
     def update(self) -> None:
