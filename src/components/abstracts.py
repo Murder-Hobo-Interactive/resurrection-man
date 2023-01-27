@@ -65,9 +65,10 @@ class AbstractFiniteStateMachine(Base):
     ) -> None:
         self.wait = wait  # todo: I think this needs a better name
         self.actor = actor
+        self.state = self.state_start
 
     @abstractmethod
-    def state_start(self) -> Callable[[Any], Callable[[Any], Any]]:
+    def state_start(self) -> None:
         ...
 
     @abstractmethod
