@@ -49,5 +49,6 @@ class App:
 
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
+
 if __name__ == "__main__":
     App()

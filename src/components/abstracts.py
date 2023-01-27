@@ -10,7 +10,7 @@ class Base(ABC):
 
 
 class AbstractActor(Base):
-    # U, V default to 0 for the default sprite 
+    # U, V default to 0 for the default sprite
     # this will make it easy to debug when something is visible when it shouldn't be
     U = 0
     V = 0
@@ -32,10 +32,10 @@ class AbstractActor(Base):
     def move_to(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
-    
+
     def move_toward(self, x: int, y: int, speed: int) -> None:
-        self.x += clamp(x-self.x, -1*speed, speed)
-        self.y += clamp(y-self.y, -1*speed, speed)
+        self.x += clamp(x - self.x, -1 * speed, speed)
+        self.y += clamp(y - self.y, -1 * speed, speed)
 
     @abstractmethod
     def update(self) -> None:

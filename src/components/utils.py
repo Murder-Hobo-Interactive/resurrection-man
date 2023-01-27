@@ -13,5 +13,8 @@ def resource_path(relative_path: str) -> str:
 
     return os.path.join(base_path, relative_path)
 
-def clamp(num:Union[int, float], min_value: Union[int, float], max_value: Union[int, float]) -> Union[int, float]:
-   return max(min(num, max_value), min_value)
+
+def clamp(
+    num: Union[int, float], min_value: Union[int, float], max_value: Union[int, float]
+) -> Union[int, float]:
+    return max(min(num, max_value), min_value)
