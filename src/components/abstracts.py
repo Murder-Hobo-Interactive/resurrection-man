@@ -59,13 +59,11 @@ class AbstractController(Base):
 
 
 class AbstractFiniteStateMachine(Base):
-    def __init__(self, wait: int, *args: Args, **kwargs: Kwargs) -> None:
-        self.wait = wait
-        self.actor: AbstractActor
-
-    @abstractmethod
-    def registerActor(self, actor: AbstractActor) -> None:
-        ...
+    def __init__(
+        self, wait: int, actor: AbstractActor, *args: Args, **kwargs: Kwargs
+    ) -> None:
+        self.wait = wait  # todo: I think this needs a better name
+        self.actor = actor
 
     @abstractmethod
     def update(self) -> None:

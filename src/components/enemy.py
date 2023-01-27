@@ -1,5 +1,5 @@
 from typing import Any
-from .abstracts import AbstractActor, AbstractController
+from .abstracts import AbstractActor, AbstractController, AbstractFiniteStateMachine
 from .aicontroller import AIController
 from .types import Args, Kwargs
 
@@ -19,6 +19,10 @@ class Enemy(AbstractActor):
 
     def update(self) -> None:
         pass
+
+
+class EnemyFSM(AbstractFiniteStateMachine):
+    ...
 
 
 class EnemyFactory:
