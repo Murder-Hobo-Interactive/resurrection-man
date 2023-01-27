@@ -5,6 +5,7 @@ from components import (
     PyxelFactory,
     EnemyFactory,
     constants as c,
+    utils as u,
     Args,
     Kwargs,
 )
@@ -29,7 +30,7 @@ class App:
             EnemyFactory.create(self._pyxel, *args, **kwargs)
         )  # todo: put this in a populate method
 
-        self._pyxel.load(resource_path("resources.pyxres"))
+        self._pyxel.load(u.resource_path("resources.pyxres"))
 
         # --------------------
         # leave this at the end of init (nothing under it will run)
@@ -48,17 +49,5 @@ class App:
 
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
-
-# todo: move this to a utils module
-def resource_path(relative_path: str) -> str:
-    """Get absolute path to resource, works for dev and for PyInstaller"""
-    try:
-        # PyInstaller creates a temp folder and stores path in _MEIPASS
-        base_path = sys._MEIPASS  # type: ignore
-    except Exception:
-        base_path = os.path.abspath(".")
-
-    return os.path.join(base_path, relative_path)
-
-
-App()
+if __name__ == "__main__":
+    App()
