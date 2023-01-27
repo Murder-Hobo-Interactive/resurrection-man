@@ -18,7 +18,11 @@ class AbstractActor(Base):
     h = Base.BASE_BLOCK
 
     def __init__(
-        self, controller: Any = None, view: Any = None, *args: Args, **kwargs: Kwargs
+        self,
+        controller: Any = None,  # figure out how to change this Any to AbstractController
+        view: Any = None,
+        *args: Args,
+        **kwargs: Kwargs
     ) -> None:
         self.controller = controller
         self.view = view
@@ -39,7 +43,7 @@ class AbstractActor(Base):
 
     @abstractmethod
     def update(self) -> None:
-        pass
+        ...
 
     def draw(self) -> None:
         self.view.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
@@ -51,4 +55,4 @@ class AbstractController(Base):
 
     @abstractmethod
     def update(self) -> None:
-        pass
+        ...
