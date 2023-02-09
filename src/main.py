@@ -22,7 +22,7 @@ class App(Base):
 
         # make a player entity
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
-        self.player = Player(controller=keyboardInput, x=10, y=10, *args, **kwargs)
+        self.player = Player(controller=keyboardInput, x=10, y=10)
 
         # todo: put add_obj in a populate method, for generating multiple enemies
         self.add_obj(EnemyFactory.create(*args, **kwargs))

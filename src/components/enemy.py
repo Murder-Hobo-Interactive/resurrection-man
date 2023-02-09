@@ -1,7 +1,7 @@
 from typing import Any
 from .abstracts import AbstractActor, AbstractController, AbstractFiniteStateMachine
 from .aicontroller import AIController, MoveAndPauseFSM
-from .types import Args, Kwargs
+from .types import Args, Kwargs, EdgeBehavior
 
 
 class BasicEnemyFSM(AbstractFiniteStateMachine):
@@ -35,8 +35,6 @@ class Enemy(AbstractActor):
             y=y,
             speed=speed,
             edge_behavior=edge_behavior,
-            *args,
-            **kwargs
         )
         self.fsm = fsm
         self.fsm.actor = self
