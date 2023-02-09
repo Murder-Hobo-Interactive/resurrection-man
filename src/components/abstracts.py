@@ -6,11 +6,16 @@ from .utils import clamp
 
 class Base(ABC):
     # "global" variables will go here
-    gameObjects: List[Any] = []
+    GAME_OBJECTS: List[
+        Any
+    ] = []  # definitely not static but I want to handle the access separately
     BASE_BLOCK = 16
 
     def add_obj(self, obj: Any) -> None:
-        Base.gameObjects.append(obj)
+        Base.GAME_OBJECTS.append(obj)
+
+    def get_game_objects(self) -> List[Any]:
+        return Base.GAME_OBJECTS
 
 
 class AbstractActor(Base):

@@ -26,7 +26,7 @@ class App(Base):
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
         self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
 
-        self.gameObjects.append(
+        self.add_obj(
             EnemyFactory.create(self._pyxel, *args, **kwargs)
         )  # todo: put this in a populate method
 
@@ -38,13 +38,13 @@ class App(Base):
 
     def update(self) -> None:
         self.player.update()
-        for x in self.gameObjects:
+        for x in self.get_game_objects():
             x.update()
 
     def draw(self) -> None:
         self._pyxel.cls(0)
         self.player.draw()
-        for x in self.gameObjects:
+        for x in self.get_game_objects():
             x.draw()
 
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
