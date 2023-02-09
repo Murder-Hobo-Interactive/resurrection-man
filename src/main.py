@@ -9,6 +9,7 @@ from components import (
     Args,
     Kwargs,
 )
+from .abstracts import Base
 import os
 import sys
 

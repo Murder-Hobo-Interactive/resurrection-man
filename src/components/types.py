@@ -5,8 +5,9 @@ from enum import Enum
 Args = tuple[Any]
 Kwargs = dict[str, Any]
 
+
 class Directions(Enum):
-	NORTH = 1
-	EAST = 2
-	SOUTH = 3
-	WEST = 4
+    NORTH = 1
+    EAST = 2
+    SOUTH = 3
+    WEST = 4
