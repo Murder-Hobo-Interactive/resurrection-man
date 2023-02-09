@@ -21,7 +21,7 @@ def get_version_str(
     url: str = __url__,
     version: Tuple[int, int, int] = __version__,
     author: str = __author__,
-    author_email=__author_email__,
+    author_email: str = __author_email__,
 ) -> str:
     return f"""# THIS FILE IS GENERATED
 # MODIFICATIONS MAY BE LOST
@@ -38,10 +38,6 @@ class VersionType(Enum):
     MAJOR = "major"
     MINOR = "minor"
     PATCH = "patch"
-
-
-def build_binaries():
-    pass
 
 
 def bump_version(
