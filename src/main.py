@@ -1,8 +1,8 @@
 from typing import Any
 from components import (
+    Base,
     KeyboardController,
     Player,
-    PyxelFactory,
     EnemyFactory,
     constants as c,
     utils as u,
@@ -13,20 +13,18 @@ import os
 import sys
 
 
-class App:
+class App(Base):
     def __init__(self, *args: Args, **kwargs: Kwargs) -> None:
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server
-        self._pyxel = PyxelFactory.create(*args, **kwargs)
         self._pyxel.init(420, 260)
 
         # make a player entity
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
         self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
 
-        self.gameObjects = []  # todo: this will eventually get moved to scenes objects
-        self.gameObjects.append(
+        self.add_obj(
             EnemyFactory.create(self._pyxel, *args, **kwargs)
         )  # todo: put this in a populate method
 
@@ -38,13 +36,13 @@ class App:
 
     def update(self) -> None:
         self.player.update()
-        for x in self.gameObjects:
+        for x in self.get_game_objects():
             x.update()
 
     def draw(self) -> None:
         self._pyxel.cls(0)
         self.player.draw()
-        for x in self.gameObjects:
+        for x in self.get_game_objects():
             x.draw()
 
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)

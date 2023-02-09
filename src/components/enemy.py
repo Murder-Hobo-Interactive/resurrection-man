@@ -14,14 +14,16 @@ class BasicEnemyFSM(AbstractFiniteStateMachine):
 
 class Enemy(AbstractActor):
     U = 16
-    V = 0
+    V = 32
+    w = AbstractActor.BASE_BLOCK * 2
+    h = AbstractActor.BASE_BLOCK * 2
 
     def __init__(
         self, controller: AbstractController, view: Any, *args: Args, **kwargs: Kwargs
     ):
         self.controller = controller
-        b_fsm = BasicEnemyFSM(30)
-        self.controller.register(self, fsm=b_fsm)
+        b_fsm = BasicEnemyFSM(30, self)
+        self.controller.register(self, fsm=b_fsm)  # type: ignore
         self.x = 24
         self.y = 24
         self.view = view
