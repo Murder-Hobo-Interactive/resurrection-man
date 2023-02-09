@@ -4,10 +4,10 @@ from .types import Args, Kwargs
 
 
 class Player(AbstractActor):
-    U = 0
-    V = 0
-    w = 16
-    h = 16
+    U = 16
+    V = 64
+    w = AbstractActor.BASE_BLOCK * 2
+    h = AbstractActor.BASE_BLOCK * 2
 
     def __init__(
         self, controller: AbstractController, view: Any, *args: Args, **kwargs: Kwargs

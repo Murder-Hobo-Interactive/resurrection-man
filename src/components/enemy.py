@@ -6,7 +6,9 @@ from .types import Args, Kwargs
 
 class Enemy(AbstractActor):
     U = 16
-    V = 0
+    V = 32
+    w = AbstractActor.BASE_BLOCK * 2
+    h = AbstractActor.BASE_BLOCK * 2
 
     def __init__(
         self, controller: AbstractController, view: Any, *args: Args, **kwargs: Kwargs
@@ -33,6 +35,6 @@ if __name__ == "__main__":
     from .keyboardcontroller import KeyboardController
     from .pyxelfactory import PyxelFactory
 
-    v = PyxelFactory.create
+    v = PyxelFactory.create()
     c = KeyboardController(v)
     e = Enemy(c, v)
