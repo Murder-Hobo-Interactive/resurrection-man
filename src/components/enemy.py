@@ -33,6 +33,6 @@ if __name__ == "__main__":
     from .keyboardcontroller import KeyboardController
     from .pyxelfactory import PyxelFactory
 
-    v = PyxelFactory.create
+    v = PyxelFactory.create()
     c = KeyboardController(v)
     e = Enemy(c, v)

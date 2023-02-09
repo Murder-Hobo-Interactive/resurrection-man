@@ -6,10 +6,10 @@ from .utils import clamp
 
 class Base(ABC):
     # "global" variables will go here
-    GAME_OBJECTS: List[
-        Any
-    ] = []  # definitely not static but I want to handle the access separately
+    # GAME_OBJECTS not static but I want to handle the access separately
+    GAME_OBJECTS: List[Any] = []
     BASE_BLOCK = 16
+    _pyxel = PyxelFactory.create(*args, **kwargs)
 
     def add_obj(self, obj: Any) -> None:
         Base.GAME_OBJECTS.append(obj)

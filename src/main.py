@@ -19,7 +19,6 @@ class App(Base):
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server
-        self._pyxel = PyxelFactory.create(*args, **kwargs)
         self._pyxel.init(420, 260)
 
         # make a player entity
