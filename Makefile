@@ -13,14 +13,16 @@ format:
 uml:
 	python -m pipenv run pyreverse -o png src/*.py src/components/*.py
 
-build-major:
-	python -m pipenv run python src/manage.py --ver major
-
-build-minor:
-	python -m pipenv run python src/manage.py --ver minor
-
-build-patch:
-	python -m pipenv run python src/manage.py --ver patch
+build_cmd = python -m pipenv run python src/manage.py
 
 build:
-	python -m pipenv run python src/manage.py
+	$(build_cmd)
+
+build-major:
+	$(build_cmd) --ver major
+
+build-minor:
+	$(build_cmd) --ver minor
+
+build-patch:
+	$(build_cmd) --ver patch
