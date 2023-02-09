@@ -8,8 +8,7 @@ from .utils import direction_to_vector
 class MoveAndPauseFSM(AbstractFiniteStateMachine):
     def __init__(self, wait: int, *args: Args, **kwargs: Kwargs) -> None:
         super().__init__(wait, *args, **kwargs)
-        self.wait_count = 0
-        self.move_count = 0
+        self.state_count = 0
         self.move_speed = 1
         self.dir = Direction.up
 
@@ -17,37 +16,20 @@ class MoveAndPauseFSM(AbstractFiniteStateMachine):
         self.state = self.state_move
 
     def state_move(self) -> None:
-        if self.wait_count < self.wait:
-            print("state move")
-            self.wait_count += 1
-            self.state = self.state_move
+        if self.state_count < self.wait:
+            self.state_count += 1
             self.actor.move(*direction_to_vector(self.dir, self.move_speed))
         else:
+            self.state_count = 0
             self.state = self.state_pause
 
     def state_pause(self) -> None:
-        if self.wait_count < self.wait:
-            print("state pause")
-            self.wait_count += 1
-            self.state = self.state_pause
+        if self.state_count < self.wait:
+            self.state_count += 1
             self.dir = random.choice([d for d in Direction])
         else:
+            self.state_count = 0
             self.state = self.state_move
-
-    def update(self) -> None:
-        if self.wait_count < self.wait:
-            self.wait_count += 1
-            return super().update()
-
-        if self.move_count < self.wait:
-            self.move_count += 1
-            self.actor.move_toward(
-                *direction_to_vector(self.dir, self.move_speed), self.move_speed
-            )
-            return super().update()
-
-        self.state = self.state_start
-        return super().update()
 
 
 class AIController(AbstractController):
@@ -60,7 +42,7 @@ class AIController(AbstractController):
         self.fsm = kwargs.get("fsm", MoveAndPauseFSM(60, self.actor))  # type: ignore
 
     def update(self) -> None:
-        return super().update()
+        self.fsm.update()
 
 
 class AIControllerFactory:

@@ -20,28 +20,38 @@ class Enemy(AbstractActor):
 
     def __init__(
         self,
-        controller: AbstractController,
-        fsm: AbstractFiniteStateMachine,
+        controller: AbstractController = AIController(),
+        x: int = 0,
+        y: int = 0,
+        speed: int = 0,
+        edge_behavior: EdgeBehavior = EdgeBehavior.stop,
+        fsm: AbstractFiniteStateMachine = MoveAndPauseFSM(60),
         *args: Args,
         **kwargs: Kwargs
     ):
-        self.controller = controller
+        super(Enemy, self).__init__(
+            controller=controller,
+            x=x,
+            y=y,
+            speed=speed,
+            edge_behavior=edge_behavior,
+            *args,
+            **kwargs
+        )
         self.fsm = fsm
         self.fsm.actor = self
-        self.controller.register(self, fsm=fsm)  # type: ignore
-        self.x = 24
-        self.y = 24
+        self.controller.register(self, fsm=fsm)
 
     def update(self) -> None:
-        pass
+        self.controller.update()
 
 
 class EnemyFactory:
     @classmethod
-    def create(cls, _pyxel: Any, *args: Args, **kwargs: Kwargs) -> Enemy:
+    def create(cls, *args: Args, **kwargs: Kwargs) -> Enemy:
         aiInput = AIController(*args, **kwargs)
         move_fsm = MoveAndPauseFSM(60)
-        return Enemy(aiInput, move_fsm)
+        return Enemy(controller=aiInput, x=24, y=24, fsm=move_fsm)
 
 
 if __name__ == "__main__":

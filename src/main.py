@@ -18,16 +18,14 @@ class App(Base):
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server
-        self._pyxel.init(420, 260)
+        self._pyxel.init(self.GAME_WIDTH, self.GAME_HEIGHT)
 
         # make a player entity
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
-        self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
+        self.player = Player(controller=keyboardInput, x=10, y=10, *args, **kwargs)
 
-        self.add_obj(
-            EnemyFactory.create(self._pyxel, *args, **kwargs)
-        )  # todo: put this in a populate method
-
+        # todo: put add_obj in a populate method, for generating multiple enemies
+        self.add_obj(EnemyFactory.create(*args, **kwargs))
         self._pyxel.load(u.resource_path("resources.pyxres"))
 
         # --------------------

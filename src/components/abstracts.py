@@ -1,7 +1,7 @@
 from typing import Any, List
 from abc import ABC, abstractmethod
 from collections.abc import Callable
-from .types import Args, Kwargs
+from .types import Args, Kwargs, EdgeBehavior
 from .utils import clamp
 from .pyxelfactory import PyxelFactory
 
@@ -11,6 +11,8 @@ class Base(ABC):
     # GAME_OBJECTS not static but I want to handle the access separately
     GAME_OBJECTS: List[Any] = []
     BASE_BLOCK = 16
+    GAME_WIDTH = 420
+    GAME_HEIGHT = 260
     _pyxel = PyxelFactory.create()
 
     @staticmethod
@@ -36,6 +38,7 @@ class AbstractActor(Base):
         x: int = 0,
         y: int = 0,
         speed: int = 0,
+        edge_behavior: EdgeBehavior = EdgeBehavior.stop,
         *args: Args,
         **kwargs: Kwargs
     ) -> None:
@@ -44,10 +47,16 @@ class AbstractActor(Base):
         self.y = y
         self.speed = speed
         self.controller.register(self)
+        # todo: maybe add different config for looping screen
+        # or leaving screen
+        self.edge_behavior: EdgeBehavior = edge_behavior
 
     def move(self, x: int, y: int) -> None:
         self.x += x
         self.y += y
+        if self.edge_behavior == EdgeBehavior.stop:
+            self.x = clamp(self.x, 0, Base.GAME_WIDTH - self.w)
+            self.y = clamp(self.y, 0, Base.GAME_HEIGHT - self.h)
 
     def move_to(self, x: int, y: int) -> None:
         self.x = x
@@ -94,8 +103,7 @@ class AbstractFiniteStateMachine(Base):
 
     @abstractmethod
     def state_start(self) -> None:
-        ...
+        raise NotImplementedError
 
-    @abstractmethod
     def update(self) -> None:
-        ...
+        self.state()
