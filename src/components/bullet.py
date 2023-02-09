@@ -1,3 +1,5 @@
+from typing import Any
+from .types import Args, Kwargs
 from .abstracts import AbstractActor, AbstractController
 from .projectilecontroller import ProjectileController
 
@@ -15,3 +17,6 @@ class Bullet(AbstractActor):
         self.x = 0
         self.y = 0
         self.speed = 42
+
+    def update(self) -> None:
+        self.controller.update()

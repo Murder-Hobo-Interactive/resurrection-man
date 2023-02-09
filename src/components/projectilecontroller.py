@@ -8,5 +8,5 @@ class ProjectileController(AbstractController):
         self._pyxel = _pyxel
         self.actor: AbstractActor
 
-    def update(self):
+    def update(self) -> None:
         pass

@@ -9,6 +9,9 @@ class Base(ABC):
     gameObjects: List[Any] = []
     BASE_BLOCK = 16
 
+    def add_obj(self, obj: Any) -> None:
+        Base.gameObjects.append(obj)
+
 
 class AbstractActor(Base):
     # U, V default to 0 for the default sprite
