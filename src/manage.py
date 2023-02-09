@@ -40,6 +40,10 @@ class VersionType(Enum):
     PATCH = "patch"
 
 
+def build_binaries():
+    pass
+
+
 def bump_version(
     version: Tuple[int, int, int], version_type: VersionType
 ) -> Tuple[int, int, int]:
