@@ -23,15 +23,14 @@ def get_version_str(
     author: str = __author__,
     author_email=__author_email__,
 ) -> str:
-    return f"""
-    # THIS FILE IS GENERATED
-    # MODIFICATIONS MAY BE LOST
-    __title__ = {title}
-    __description__ = {description}
-    __url__ = {url}
-    __version__ = {version}
-    __author__ = {author}
-    __author_email__ = {author_email}
+    return f"""# THIS FILE IS GENERATED
+# MODIFICATIONS MAY BE LOST
+__title__ = "{title}"
+__description__ = "{description}"
+__url__ = "{url}"
+__version__ = {version}
+__author__ = "{author}"
+__author_email__ = "{author_email}"
     """
 
 
@@ -61,7 +60,7 @@ def bump_version(
 def build(ver: VersionType | None = None) -> None:
     if ver:
         version = bump_version(__version__, ver)
-        with open("components/__version__.py", "w") as f:
+        with open("src/components/__version__.py", "w") as f:
             f.write(get_version_str(version=version))
 
 
