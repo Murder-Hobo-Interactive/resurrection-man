@@ -18,9 +18,9 @@ class BulletFactory(Base):
     @classmethod
     def create(
         cls,
-        x: int = 0,
-        y: int = 0,
-        dir: Direction = Direction.up,
+        x: int,
+        y: int,
+        dir: Direction,
         speed: int = 0,
         *args: Args,
         **kwargs: Kwargs
