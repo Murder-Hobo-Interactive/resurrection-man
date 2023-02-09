@@ -6,7 +6,7 @@ Args = tuple[Any]
 Kwargs = dict[str, Any]
 
 
-class Directions(Enum):
+class Dir(Enum):
     NORTH = 1
     EAST = 2
     SOUTH = 3

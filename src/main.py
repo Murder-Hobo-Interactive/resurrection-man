@@ -1,5 +1,6 @@
 from typing import Any
 from components import (
+    Base,
     KeyboardController,
     Player,
     PyxelFactory,
@@ -9,7 +10,6 @@ from components import (
     Args,
     Kwargs,
 )
-from .abstracts import Base
 import os
 import sys
 
@@ -26,7 +26,6 @@ class App:
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
         self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
 
-        self.gameObjects = []  # todo: this will eventually get moved to scenes objects
         self.gameObjects.append(
             EnemyFactory.create(self._pyxel, *args, **kwargs)
         )  # todo: put this in a populate method

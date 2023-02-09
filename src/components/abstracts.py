@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, List
 from abc import ABC, abstractmethod
 from .types import Args, Kwargs
 from .utils import clamp
@@ -6,6 +6,7 @@ from .utils import clamp
 
 class Base(ABC):
     # "global" variables will go here
+    gameObjects: List[Any] = []
     BASE_BLOCK = 16
 
 
