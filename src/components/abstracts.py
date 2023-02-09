@@ -15,6 +15,7 @@ class Base(ABC):
     BASE_BLOCK = 16
     GAME_WIDTH = 420
     GAME_HEIGHT = 260
+
     _pyxel = PyxelFactory.create()
 
     @staticmethod
