@@ -16,11 +16,16 @@ class Bullet(AbstractActor):
 
 class BulletFactory(Base):
     @classmethod
-    def create(
-        cls, dir: Direction, speed: int = 10, *args: Args, **kwargs: Kwargs
-    ) -> Any:
+    def create(cls, *args: Args, **kwargs: Kwargs) -> Any:
+        """
+        kwarg params:
+            x: int
+            y: int
+            dir: Direction
+            speed: int
+        """
         # beware this might get a little funky if I'm passing the
         # same args to both the controller and the bullet itself
         # creating a footgun for myself later when those args shouldn't be the same
-        pc = ProjectileController(dir, *args, **kwargs)
-        return Bullet(pc)
+        pc = ProjectileController(*args, **kwargs)
+        return Bullet(pc, *args, **kwargs)
