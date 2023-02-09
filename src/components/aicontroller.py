@@ -6,10 +6,8 @@ from .utils import direction_to_vector
 
 
 class MoveAndPauseFSM(AbstractFiniteStateMachine):
-    def __init__(
-        self, wait: int, actor: AbstractActor, *args: Args, **kwargs: Kwargs
-    ) -> None:
-        super().__init__(wait, actor, *args, **kwargs)
+    def __init__(self, wait: int, *args: Args, **kwargs: Kwargs) -> None:
+        super().__init__(wait, *args, **kwargs)
         self.wait_count = 0
         self.move_count = 0
         self.move_speed = 1

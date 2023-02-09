@@ -75,12 +75,22 @@ class AbstractController(Base):
 
 
 class AbstractFiniteStateMachine(Base):
-    def __init__(
-        self, wait: int, actor: AbstractActor, *args: Args, **kwargs: Kwargs
-    ) -> None:
+    def __init__(self, wait: int, *args: Args, **kwargs: Kwargs) -> None:
         self.wait = wait  # todo: I think this needs a better name
         self.state = self.state_start
-        self.actor = actor
+        self._actor: AbstractActor
+        # todo: I feel like there is a good way to use
+        # a decorator here to decorate the state methods
+        # todo: probably need to add checks that actor is set
+        # before executing the state methods
+
+    @property
+    def actor(self) -> AbstractActor:
+        return self._actor
+
+    @actor.setter
+    def actor(self, actor: AbstractActor) -> None:
+        self._actor = actor
 
     @abstractmethod
     def state_start(self) -> None:

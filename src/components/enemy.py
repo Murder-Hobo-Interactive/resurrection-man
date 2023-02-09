@@ -1,6 +1,6 @@
 from typing import Any
 from .abstracts import AbstractActor, AbstractController, AbstractFiniteStateMachine
-from .aicontroller import AIController
+from .aicontroller import AIController, MoveAndPauseFSM
 from .types import Args, Kwargs
 
 
@@ -19,11 +19,16 @@ class Enemy(AbstractActor):
     h = AbstractActor.BASE_BLOCK * 2
 
     def __init__(
-        self, controller: AbstractController, fsm: None, *args: Args, **kwargs: Kwargs
+        self,
+        controller: AbstractController,
+        fsm: AbstractFiniteStateMachine,
+        *args: Args,
+        **kwargs: Kwargs
     ):
         self.controller = controller
-        b_fsm = fsm
-        self.controller.register(self, fsm=b_fsm)  # type: ignore
+        self.fsm = fsm
+        self.fsm.actor = self
+        self.controller.register(self, fsm=fsm)  # type: ignore
         self.x = 24
         self.y = 24
 
@@ -35,8 +40,8 @@ class EnemyFactory:
     @classmethod
     def create(cls, _pyxel: Any, *args: Args, **kwargs: Kwargs) -> Enemy:
         aiInput = AIController(*args, **kwargs)
-        # aiInput.register()
-        return Enemy(aiInput, *args, **kwargs)
+        move_fsm = MoveAndPauseFSM(60)
+        return Enemy(aiInput, move_fsm)
 
 
 if __name__ == "__main__":
