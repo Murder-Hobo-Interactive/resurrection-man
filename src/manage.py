@@ -3,18 +3,25 @@ from typing import Tuple
 
 import typer
 
-from components import __version__
+from components import (
+    __title__,
+    __description__,
+    __url__,
+    __version__,
+    __author__,
+    __author_email__,
+)
 
 app = typer.Typer()
 
 
 def get_version_str(
-    title: str = "Resurrection Man",
-    description: str = "Grave robbing and other fun things",
-    url: str = "https://github.com/Murder-Hobo-Interactive/resurrection-man",
-    version: Tuple[int, int, int] = (0, 0, 0),
-    author: str = "Chris Palmer",
-    author_email="capalmer1013@gmail.com",
+    title: str = __title__,
+    description: str = __description__,
+    url: str = __url__,
+    version: Tuple[int, int, int] = __version__,
+    author: str = __author__,
+    author_email=__author_email__,
 ) -> str:
     return f"""
     # THIS FILE IS GENERATED
@@ -55,7 +62,6 @@ def bump_version(
 def build(ver: int) -> None:
     print(__version__)
     # bump_version(version)
-    pass
 
 
 if __name__ == "__main__":
