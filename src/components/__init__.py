@@ -5,6 +5,7 @@ from .pyxelfactory import PyxelFactory
 from .aicontroller import AIController
 from .enemy import Enemy, EnemyFactory
 from .types import Args, Kwargs, Direction
-from .projectilecontroller import (
-    ProjectileController,
-)  # Import ".projectilecontroller" could not be resolvedPylance
+
+# todo get pylance to not be mad about this
+# Import ".projectilecontroller" could not be resolvedPylance
+from .projectilecontroller import ProjectileController
