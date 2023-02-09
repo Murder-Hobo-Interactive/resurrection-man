@@ -1,7 +1,6 @@
 import sys
 import os
 from typing import Union, TypeVar
-from .abstracts import Base
 from .types import Direction
 
 N = TypeVar("N", int, float)  # N for number
