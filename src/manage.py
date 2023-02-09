@@ -31,7 +31,7 @@ __url__ = "{url}"
 __version__ = {version}
 __author__ = "{author}"
 __author_email__ = "{author_email}"
-    """
+"""
 
 
 class VersionType(Enum):

@@ -18,8 +18,8 @@ uml:
 	$(uml_cmd)
 
 
-build_cmd = $(types_cmd) && $(format_cmd) && $(uml_cmd)
-version_cmd = $(build_cmd) && python -m pipenv run python src/manage.py
+prebuild_cmd = $(types_cmd) && $(format_cmd) && $(uml_cmd)
+version_cmd = $(prebuild_cmd) && python -m pipenv run python src/manage.py
 
 build:
 	$(version_cmd)
