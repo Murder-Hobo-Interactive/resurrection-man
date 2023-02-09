@@ -19,14 +19,13 @@ class Enemy(AbstractActor):
     h = AbstractActor.BASE_BLOCK * 2
 
     def __init__(
-        self, controller: AbstractController, view: Any, *args: Args, **kwargs: Kwargs
+        self, controller: AbstractController, fsm: None, *args: Args, **kwargs: Kwargs
     ):
         self.controller = controller
-        b_fsm = BasicEnemyFSM(30, self)
+        b_fsm = fsm
         self.controller.register(self, fsm=b_fsm)  # type: ignore
         self.x = 24
         self.y = 24
-        self.view = view
 
     def update(self) -> None:
         pass
@@ -37,7 +36,7 @@ class EnemyFactory:
     def create(cls, _pyxel: Any, *args: Args, **kwargs: Kwargs) -> Enemy:
         aiInput = AIController(*args, **kwargs)
         # aiInput.register()
-        return Enemy(aiInput, _pyxel, *args, **kwargs)
+        return Enemy(aiInput, *args, **kwargs)
 
 
 if __name__ == "__main__":

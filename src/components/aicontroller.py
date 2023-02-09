@@ -20,6 +20,7 @@ class MoveAndPauseFSM(AbstractFiniteStateMachine):
 
     def state_move(self) -> None:
         if self.wait_count < self.wait:
+            print("state move")
             self.wait_count += 1
             self.state = self.state_move
             self.actor.move(*direction_to_vector(self.dir, self.move_speed))
@@ -28,6 +29,7 @@ class MoveAndPauseFSM(AbstractFiniteStateMachine):
 
     def state_pause(self) -> None:
         if self.wait_count < self.wait:
+            print("state pause")
             self.wait_count += 1
             self.state = self.state_pause
             self.dir = random.choice([d for d in Direction])
