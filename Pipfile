@@ -10,6 +10,8 @@ black = "*"
 pylint = "*"
 pre-commit = "*"
 colorama = "*"
+pyinstaller = "*"
+typer = {extras = ["all"], version = "*"}
 
 [dev-packages]
 
