@@ -6,8 +6,9 @@ Args = tuple[Any]
 Kwargs = dict[str, Any]
 
 
-class Dir(Enum):
-    NORTH = 1
-    EAST = 2
-    SOUTH = 3
-    WEST = 4
+# https://mypy.readthedocs.io/en/stable/literal_types.html#enums
+class Direction(Enum):
+    up = "up"
+    down = "down"
+    left = "left"
+    right = "right"

@@ -1,7 +1,7 @@
 from typing import Any
 from .abstracts import AbstractController, AbstractActor
-from .types import Args, Kwargs
-from .bullet import Bullet
+from .types import Args, Kwargs, Direction
+from .bullet import Bullet, BulletFactory
 from .projectilecontroller import ProjectileController
 
 
@@ -29,7 +29,8 @@ class KeyboardController(AbstractController):
             self.actor.move(SPEED, 0)
 
         if self._pyxel.btn(self._pyxel.KEY_UP):
-            Bullet()
+            BulletFactory.create(Direction.up, speed=42)
+
         if self._pyxel.btn(self._pyxel.KEY_DOWN):
             ...
         if self._pyxel.btn(self._pyxel.KEY_LEFT):

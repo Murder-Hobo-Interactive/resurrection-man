@@ -2,6 +2,7 @@ from typing import Any, List
 from abc import ABC, abstractmethod
 from .types import Args, Kwargs
 from .utils import clamp
+from .pyxelfactory import PyxelFactory
 
 
 class Base(ABC):
@@ -9,7 +10,7 @@ class Base(ABC):
     # GAME_OBJECTS not static but I want to handle the access separately
     GAME_OBJECTS: List[Any] = []
     BASE_BLOCK = 16
-    _pyxel = PyxelFactory.create(*args, **kwargs)
+    _pyxel = PyxelFactory.create()
 
     def add_obj(self, obj: Any) -> None:
         Base.GAME_OBJECTS.append(obj)
@@ -29,14 +30,16 @@ class AbstractActor(Base):
     def __init__(
         self,
         controller: Any = None,  # figure out how to change this Any to AbstractController
-        view: Any = None,
+        x: int = 0,
+        y: int = 0,
+        speed: int = 0,
         *args: Args,
         **kwargs: Kwargs
     ) -> None:
         self.controller = controller
-        self.view = view
-        self.x = 0
-        self.y = 0
+        self.x = x
+        self.y = y
+        self.speed = speed
 
     def move(self, x: int, y: int) -> None:
         self.x += x
@@ -55,7 +58,7 @@ class AbstractActor(Base):
         ...
 
     def draw(self) -> None:
-        self.view.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
+        self._pyxel.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
 
 
 class AbstractController(Base):

@@ -3,7 +3,6 @@ from components import (
     Base,
     KeyboardController,
     Player,
-    PyxelFactory,
     EnemyFactory,
     constants as c,
     utils as u,
