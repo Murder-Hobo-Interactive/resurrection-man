@@ -36,10 +36,9 @@ def get_version_str(
 
 
 class VersionType(Enum):
-    NONE = 0
-    MAJOR = 1
-    MINOR = 2
-    PATCH = 3
+    MAJOR = "major"
+    MINOR = "minor"
+    PATCH = "patch"
 
 
 def bump_version(
@@ -59,9 +58,11 @@ def bump_version(
 
 
 @app.command()
-def build(ver: int) -> None:
-    print(__version__)
-    # bump_version(version)
+def build(ver: VersionType | None = None) -> None:
+    if ver:
+        version = bump_version(__version__, ver)
+        with open("components/__version__.py", "w") as f:
+            f.write(get_version_str(version=version))
 
 
 if __name__ == "__main__":
