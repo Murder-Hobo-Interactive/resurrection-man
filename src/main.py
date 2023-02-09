@@ -14,7 +14,7 @@ import os
 import sys
 
 
-class App:
+class App(Base):
     def __init__(self, *args: Args, **kwargs: Kwargs) -> None:
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
