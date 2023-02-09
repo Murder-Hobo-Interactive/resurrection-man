@@ -12,10 +12,12 @@ class Base(ABC):
     BASE_BLOCK = 16
     _pyxel = PyxelFactory.create()
 
-    def add_obj(self, obj: Any) -> None:
+    @staticmethod
+    def add_obj(obj: Any) -> None:
         Base.GAME_OBJECTS.append(obj)
 
-    def get_game_objects(self) -> List[Any]:
+    @staticmethod
+    def get_game_objects() -> List[Any]:
         return Base.GAME_OBJECTS
 
 
@@ -40,6 +42,7 @@ class AbstractActor(Base):
         self.x = x
         self.y = y
         self.speed = speed
+        self.controller.register(self)
 
     def move(self, x: int, y: int) -> None:
         self.x += x

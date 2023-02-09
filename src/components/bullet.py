@@ -24,9 +24,9 @@ class BulletFactory(Base):
         speed: int = 0,
         *args: Args,
         **kwargs: Kwargs
-    ) -> Any:
+    ) -> None:
         # beware this might get a little funky if I'm passing the
         # same args to both the controller and the bullet itself
         # creating a footgun for myself later when those args shouldn't be the same
         pc = ProjectileController(dir=dir)
-        return Bullet(pc, x=x, y=y, speed=speed)
+        cls.add_obj(Bullet(pc, x=x, y=y, speed=speed))
