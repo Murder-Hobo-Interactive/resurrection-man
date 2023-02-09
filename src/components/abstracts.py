@@ -1,6 +1,8 @@
 from typing import Any, List
 from abc import ABC, abstractmethod
 from collections.abc import Callable
+from functools import wraps
+
 from .types import Args, Kwargs, EdgeBehavior
 from .utils import clamp
 from .pyxelfactory import PyxelFactory
@@ -22,6 +24,34 @@ class Base(ABC):
     @staticmethod
     def get_game_objects() -> List[Any]:
         return Base.GAME_OBJECTS
+
+
+class Decorators:
+    @staticmethod
+    def movement(func: Any) -> Any:  # I'll come back for this
+        @wraps(func)
+        def _wrapper(self, *args: Args, **kwargs: Kwargs) -> None:  # type: ignore
+            # before movement
+            func(self, *args, **kwargs)
+            # after movement
+            if self.edge_behavior == EdgeBehavior.stop:
+                self.x = clamp(self.x, 0, Base.GAME_WIDTH - self.w)
+                self.y = clamp(self.y, 0, Base.GAME_HEIGHT - self.h)
+            if self.edge_behavior == EdgeBehavior.loop:
+                self.x = self.x % Base.GAME_WIDTH
+                self.y = self.y % Base.GAME_HEIGHT
+            if self.edge_behavior == EdgeBehavior.bounce:
+                if self.x < 0 or self.x > Base.GAME_WIDTH - self.w:
+                    self.speed *= -1
+                if self.y < 0 or self.y > Base.GAME_HEIGHT - self.h:
+                    self.speed *= -1
+            if self.edge_behavior == EdgeBehavior.destroy:
+                if self.x < 0 or self.x > Base.GAME_WIDTH - self.w:
+                    self.destroy()
+                if self.y < 0 or self.y > Base.GAME_HEIGHT - self.h:
+                    self.destroy()
+
+        return _wrapper
 
 
 class AbstractActor(Base):
@@ -51,20 +81,23 @@ class AbstractActor(Base):
         # or leaving screen
         self.edge_behavior: EdgeBehavior = edge_behavior
 
+    @Decorators.movement
     def move(self, x: int, y: int) -> None:
         self.x += x
         self.y += y
-        if self.edge_behavior == EdgeBehavior.stop:
-            self.x = clamp(self.x, 0, Base.GAME_WIDTH - self.w)
-            self.y = clamp(self.y, 0, Base.GAME_HEIGHT - self.h)
 
+    @Decorators.movement
     def move_to(self, x: int, y: int) -> None:
         self.x = x
         self.y = y
 
+    @Decorators.movement
     def move_toward(self, x: int, y: int, speed: int) -> None:
         self.x += int(clamp(x - self.x, -1 * speed, speed))
         self.y += int(clamp(y - self.y, -1 * speed, speed))
+
+    def destroy(self) -> None:
+        Base.GAME_OBJECTS.remove(self)
 
     @abstractmethod
     def update(self) -> None:

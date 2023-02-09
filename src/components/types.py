@@ -19,3 +19,4 @@ class EdgeBehavior(Enum):
     bounce = "bounce"
     stop = "stop"
     destroy = "destroy"
+    loop = "loop"
