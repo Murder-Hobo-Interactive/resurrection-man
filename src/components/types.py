@@ -12,3 +12,11 @@ class Direction(Enum):
     down = "down"
     left = "left"
     right = "right"
+
+
+class EdgeBehavior(Enum):
+    wrap = "wrap"
+    bounce = "bounce"
+    stop = "stop"
+    destroy = "destroy"
+    loop = "loop"

@@ -1,5 +1,5 @@
 from typing import Any
-from .types import Args, Kwargs, Direction
+from .types import Args, Kwargs, Direction, EdgeBehavior
 from .abstracts import AbstractActor, AbstractController, Base
 from .projectilecontroller import ProjectileController
 
@@ -29,4 +29,6 @@ class BulletFactory(Base):
         # same args to both the controller and the bullet itself
         # creating a footgun for myself later when those args shouldn't be the same
         pc = ProjectileController(dir=dir)
-        cls.add_obj(Bullet(pc, x=x, y=y, speed=speed))
+        cls.add_obj(
+            Bullet(pc, x=x, y=y, speed=speed, edge_behavior=EdgeBehavior.destroy)
+        )
