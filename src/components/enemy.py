@@ -1,5 +1,10 @@
 from typing import Any
-from .abstracts import AbstractActor, AbstractController, AbstractFiniteStateMachine
+from .abstracts import (
+    Base,
+    AbstractActor,
+    AbstractController,
+    AbstractFiniteStateMachine,
+)
 from .aicontroller import AIController, MoveAndPauseFSM
 from .types import Args, Kwargs, EdgeBehavior
 
@@ -44,12 +49,17 @@ class Enemy(AbstractActor):
         self.controller.update()
 
 
-class EnemyFactory:
+class EnemyFactory(Base):  # todo: probably implement a base factory class
     @classmethod
     def create(cls, *args: Args, **kwargs: Kwargs) -> Enemy:
         aiInput = AIController(*args, **kwargs)
         move_fsm = MoveAndPauseFSM(60)
-        return Enemy(controller=aiInput, x=24, y=24, fsm=move_fsm)
+        return Enemy(
+            controller=aiInput,
+            x=cls.GAME_WIDTH // 2,
+            y=cls.GAME_HEIGHT // 2,
+            fsm=move_fsm,
+        )
 
 
 if __name__ == "__main__":
