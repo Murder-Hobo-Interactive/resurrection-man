@@ -1,3 +1,7 @@
+types_cmd = python -m pipenv run mypy --strict --implicit-reexport src
+format_cmd = python -m pipenv run black .
+uml_cmd = python -m pipenv run pyreverse -o png src/*.py src/components/*.py
+
 run:
 	python -m pipenv run python src/main.py
 
@@ -5,24 +9,26 @@ edit:
 	python -m pipenv run pyxel edit src/resources.pyxres
 
 types:
-	python -m pipenv run mypy --strict --implicit-reexport src
+	$(types_cmd)
 
 format:
-	python -m pipenv run black .
+	$(format_cmd)
 
 uml:
-	python -m pipenv run pyreverse -o png src/*.py src/components/*.py
+	$(uml_cmd)
 
-build_cmd = python -m pipenv run python src/manage.py
+
+build_cmd = $(types_cmd) && $(format_cmd) && $(uml_cmd)
+version_cmd = $(build_cmd) && python -m pipenv run python src/manage.py
 
 build:
-	$(build_cmd)
+	$(version_cmd)
 
 build-major:
-	$(build_cmd) --ver major
+	$(version_cmd) --ver major
 
 build-minor:
-	$(build_cmd) --ver minor
+	$(version_cmd) --ver minor
 
 build-patch:
-	$(build_cmd) --ver patch
+	$(version_cmd) --ver patch
