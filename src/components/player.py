@@ -1,6 +1,7 @@
 from typing import Any
-from .abstracts import AbstractActor, AbstractController
+from .abstracts import AbstractActor, Base
 from .types import Args, Kwargs
+from .keyboardcontroller import KeyboardController
 
 
 class Player(AbstractActor):
@@ -14,6 +15,22 @@ class Player(AbstractActor):
 
     def draw(self) -> None:
         self._pyxel.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
+
+
+class PlayerFactory(Base):
+    @classmethod
+    def create(
+        cls,
+        x: int,
+        y: int,
+        controller: Any = None,  # figure out how to change this Any to AbstractController
+        *args: Args,
+        **kwargs: Kwargs
+    ) -> None:
+        keyboardInput = KeyboardController(cls._pyxel, *args, **kwargs)
+        # there might be a reason to consider keeping the player object at index 0 ?
+
+        return Player(controller=keyboardInput, x=x, y=y)
 
 
 if __name__ == "__main__":

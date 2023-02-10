@@ -1,6 +1,7 @@
+from pickle import dump as p_dump, load as p_load
 from .types import Args, Kwargs, Direction
 from .abstracts import Base
-from .player import Player
+from .player import PlayerFactory
 from .enemy import EnemyFactory
 from .keyboardcontroller import KeyboardController
 
@@ -23,38 +24,40 @@ class Scene(Base):
         name = "scene"
         camera = None
         background = None
+        self.game_objects = []
         if filename:
             pass
 
-    def add_game_object(self, game_object: Base) -> None:
-        Base.add_game_object(game_object)
+        Base.SCENE = self
 
     def create_player(
         self, x: int = 0, y: int = 0, *args: Args, **kwargs: Kwargs
     ) -> None:
-        keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
-        # there might be a reason to consider keeping the player object at index 0 ?
-        Base.add_game_object(Player(controller=keyboardInput, x=x, y=y))
+        self.append(PlayerFactory.create(x=x, y=y, *args, **kwargs))
 
     def create_enemy(
         self, x: int = 0, y: int = 0, *args: Args, **kwargs: Kwargs
     ) -> None:
-        self.add_game_object(EnemyFactory.create(*args, **kwargs))
+        self.append(EnemyFactory.create(*args, **kwargs))
 
     def create_n_enemies(self, n):
         for _ in range(n):
             self.create_enemy()
 
     def update(self) -> None:
-        for each in self.get_game_objects():
+        for each in self.game_objects:
             each.update()
 
     def draw(self) -> None:
-        for each in self.get_game_objects():
+        for each in self.game_objects:
             each.draw()
+
+    def append(self, game_object: Base) -> None:
+        self.game_objects.append(game_object)
 
 
 class SceneLoader(Base):
     @staticmethod
-    def load(filename: str = "") -> Scene:
-        return Scene()
+    def load(filename: str) -> Scene:
+        scene = p_load(open(filename, "rb"))
+        return scene

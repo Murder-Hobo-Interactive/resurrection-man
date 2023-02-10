@@ -7,6 +7,7 @@ from components import (
     constants as c,
     utils as u,
     Scene,
+    SceneLoader,
     Args,
     Kwargs,
 )
@@ -22,9 +23,11 @@ class App(Base):
         self._pyxel.init(self.GAME_WIDTH, self.GAME_HEIGHT)
         self._pyxel.load(u.resource_path("resources.pyxres"))
 
-        self.scene = Scene()
-        self.scene.create_player(x=10, y=10)
-        self.scene.create_enemy(x=20, y=20)
+        # self.scene = Scene()
+        # self.scene.create_player(x=10, y=10)
+        # self.scene.create_enemy(x=20, y=20)
+        self.scene = SceneLoader.load("scenes/default_scene.pickle")
+
         # todo: put add_game_object in a populate method, for generating multiple enemies
 
         # --------------------
