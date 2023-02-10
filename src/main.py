@@ -26,7 +26,7 @@ class App(Base):
         # self.scene = Scene()
         # self.scene.create_player(x=10, y=10)
         # self.scene.create_enemy(x=20, y=20)
-        self.scene = SceneLoader.load("scenes/default_scene.pickle")
+        SceneLoader.load("scenes/default_scene.pickle")
 
         # todo: put add_game_object in a populate method, for generating multiple enemies
 

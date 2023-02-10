@@ -59,5 +59,4 @@ class Scene(Base):
 class SceneLoader(Base):
     @staticmethod
     def load(filename: str) -> Scene:
-        scene = p_load(open(filename, "rb"))
-        return scene
+        Base.SCENE = p_load(open(filename, "rb"))
