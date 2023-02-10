@@ -19,7 +19,7 @@ class Base(ABC):
     _pyxel = PyxelFactory.create()
 
     @staticmethod
-    def add_obj(obj: Any) -> None:
+    def add_game_obj(obj: Any) -> None:
         Base.GAME_OBJECTS.append(obj)
 
     @staticmethod
