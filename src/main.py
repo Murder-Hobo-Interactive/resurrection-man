@@ -24,8 +24,8 @@ class App(Base):
         keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
         self.player = Player(controller=keyboardInput, x=10, y=10)
 
-        # todo: put add_game_obj in a populate method, for generating multiple enemies
-        self.add_game_obj(EnemyFactory.create(*args, **kwargs))
+        # todo: put add_game_object in a populate method, for generating multiple enemies
+        self.add_game_object(EnemyFactory.create(*args, **kwargs))
         self._pyxel.load(u.resource_path("resources.pyxres"))
 
         # --------------------

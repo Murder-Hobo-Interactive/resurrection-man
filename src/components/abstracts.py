@@ -10,7 +10,8 @@ from .pyxelfactory import PyxelFactory
 
 class Base(ABC):
     # "global" variables will go here
-    # GAME_OBJECTS not static but I want to handle the access separately
+    # GAME_OBJECTS not const but I want to handle the access separately
+    # the idea here is to make it look scary so I don't use it directly
     GAME_OBJECTS: List[Any] = []
     BASE_BLOCK = 16
     GAME_WIDTH = 420
@@ -19,7 +20,7 @@ class Base(ABC):
     _pyxel = PyxelFactory.create()
 
     @staticmethod
-    def add_game_obj(obj: Any) -> None:
+    def add_game_object(obj: Any) -> None:
         Base.GAME_OBJECTS.append(obj)
 
     @staticmethod
