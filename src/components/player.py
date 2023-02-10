@@ -27,7 +27,7 @@ class PlayerFactory(Base):
         *args: Args,
         **kwargs: Kwargs
     ) -> None:
-        keyboardInput = KeyboardController(cls._pyxel, *args, **kwargs)
+        keyboardInput = KeyboardController(*args, **kwargs)
         # there might be a reason to consider keeping the player object at index 0 ?
 
         return Player(controller=keyboardInput, x=x, y=y)
