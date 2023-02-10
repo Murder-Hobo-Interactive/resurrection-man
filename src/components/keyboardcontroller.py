@@ -6,8 +6,7 @@ from .projectilecontroller import ProjectileController
 
 
 class KeyboardController(AbstractController):
-    def __init__(self, _pyxel: Any, *args: Args, **kwargs: Kwargs) -> None:
-        self._pyxel = _pyxel
+    def __init__(self, *args: Args, **kwargs: Kwargs) -> None:
         self.actor: AbstractActor
 
     def update(self) -> None:

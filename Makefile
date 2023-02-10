@@ -32,3 +32,6 @@ build-minor:
 
 build-patch:
 	$(version_cmd) --ver patch
+
+scene-default:
+	python -m pipenv run python src/manage.py generate-scene src/scenes/default_scene.pickle

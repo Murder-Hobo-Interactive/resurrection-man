@@ -6,6 +6,8 @@ from components import (
     EnemyFactory,
     constants as c,
     utils as u,
+    Scene,
+    SceneLoader,
     Args,
     Kwargs,
 )
@@ -19,27 +21,25 @@ class App(Base):
         # it's easy to either fake it for testing
         # or run headless as a game server
         self._pyxel.init(self.GAME_WIDTH, self.GAME_HEIGHT)
-
-        # make a player entity
-        keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
-        self.player = Player(controller=keyboardInput, x=10, y=10)
-
-        # todo: put add_obj in a populate method, for generating multiple enemies
-        self.add_obj(EnemyFactory.create(*args, **kwargs))
         self._pyxel.load(u.resource_path("resources.pyxres"))
+
+        # self.scene = Scene()
+        # self.scene.create_player(x=10, y=10)
+        # self.scene.create_enemy(x=20, y=20)
+        SceneLoader.load("scenes/default_scene.pickle")
+
+        # todo: put add_game_object in a populate method, for generating multiple enemies
 
         # --------------------
         # leave this at the end of init (nothing under it will run)
         self._pyxel.run(self.update, self.draw)
 
     def update(self) -> None:
-        self.player.update()
         for x in self.get_game_objects():
             x.update()
 
     def draw(self) -> None:
         self._pyxel.cls(0)
-        self.player.draw()
         for x in self.get_game_objects():
             x.draw()
 

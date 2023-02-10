@@ -10,8 +10,9 @@ from .pyxelfactory import PyxelFactory
 
 class Base(ABC):
     # "global" variables will go here
-    # GAME_OBJECTS not static but I want to handle the access separately
-    GAME_OBJECTS: List[Any] = []
+    # GAME_OBJECTS not const but I want to handle the access separately
+    # the idea here is to make it look scary so I don't use it directly
+    SCENE: Any
     BASE_BLOCK = 16
     GAME_WIDTH = 420
     GAME_HEIGHT = 260
@@ -19,12 +20,16 @@ class Base(ABC):
     _pyxel = PyxelFactory.create()
 
     @staticmethod
-    def add_obj(obj: Any) -> None:
-        Base.GAME_OBJECTS.append(obj)
+    def set_scene(scene: Any) -> None:
+        Base.SCENE = scene
 
     @staticmethod
-    def get_game_objects() -> List[Any]:
-        return Base.GAME_OBJECTS
+    def add_game_object(obj: Any) -> None:
+        Base.SCENE.append(obj)
+
+    @staticmethod
+    def get_game_objects() -> Any:
+        return Base.SCENE.game_objects
 
 
 class Decorators:
@@ -98,7 +103,7 @@ class AbstractActor(Base):
         self.y += int(clamp(y - self.y, -1 * speed, speed))
 
     def destroy(self) -> None:
-        Base.GAME_OBJECTS.remove(self)
+        Base.SCENE.game_objects.remove(self)
 
     @abstractmethod
     def update(self) -> None:
