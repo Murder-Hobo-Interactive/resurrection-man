@@ -1,4 +1,5 @@
 from pickle import dump as p_dump, load as p_load
+from typing import List, Any
 from .types import Args, Kwargs, Direction
 from .abstracts import Base
 from .player import PlayerFactory
@@ -10,37 +11,33 @@ class Background(Base):
     def __init__(self, U: int, V: int, w: int, h: int) -> None:
         self.name = "background"
 
-    def update(self):
+    def update(self) -> None:
         pass
 
-    def draw(self):
+    def draw(self) -> None:
         pass
 
 
 # as much as I want to make another
 # abstract class, I don't think I need to
 class Scene(Base):
-    def __init__(self, filename: str = "") -> None:
+    def __init__(self) -> None:
         name = "scene"
         camera = None
         background = None
-        self.game_objects = []
-        if filename:
-            pass
-
-        Base.SCENE = self
+        self.game_objects: List[Any] = []
 
     def create_player(
         self, x: int = 0, y: int = 0, *args: Args, **kwargs: Kwargs
     ) -> None:
-        self.append(PlayerFactory.create(x=x, y=y, *args, **kwargs))
+        self.append(PlayerFactory.create(x=x, y=y))
 
     def create_enemy(
         self, x: int = 0, y: int = 0, *args: Args, **kwargs: Kwargs
     ) -> None:
         self.append(EnemyFactory.create(*args, **kwargs))
 
-    def create_n_enemies(self, n):
+    def create_n_enemies(self, n: int) -> None:
         for _ in range(n):
             self.create_enemy()
 
@@ -58,5 +55,5 @@ class Scene(Base):
 
 class SceneLoader(Base):
     @staticmethod
-    def load(filename: str) -> Scene:
+    def load(filename: str) -> None:
         Base.SCENE = p_load(open(filename, "rb"))

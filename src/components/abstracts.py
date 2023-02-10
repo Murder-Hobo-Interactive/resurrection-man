@@ -12,7 +12,7 @@ class Base(ABC):
     # "global" variables will go here
     # GAME_OBJECTS not const but I want to handle the access separately
     # the idea here is to make it look scary so I don't use it directly
-    SCENE = None
+    SCENE: Any
     BASE_BLOCK = 16
     GAME_WIDTH = 420
     GAME_HEIGHT = 260
@@ -28,7 +28,7 @@ class Base(ABC):
         Base.SCENE.append(obj)
 
     @staticmethod
-    def get_game_objects() -> List[Any]:
+    def get_game_objects() -> Any:
         return Base.SCENE.game_objects
 
 

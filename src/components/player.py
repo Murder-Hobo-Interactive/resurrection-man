@@ -26,7 +26,7 @@ class PlayerFactory(Base):
         controller: Any = None,  # figure out how to change this Any to AbstractController
         *args: Args,
         **kwargs: Kwargs
-    ) -> None:
+    ) -> Player:
         keyboardInput = KeyboardController(*args, **kwargs)
         # there might be a reason to consider keeping the player object at index 0 ?
 
@@ -38,6 +38,5 @@ if __name__ == "__main__":
     from .keyboardcontroller import KeyboardController
     from .pyxelfactory import PyxelFactory
 
-    v = PyxelFactory.create
-    c = KeyboardController(v)
+    c = KeyboardController()
     e = Player(controller=c)
