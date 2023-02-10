@@ -1,3 +1,4 @@
+import pickle
 from enum import Enum
 from typing import Tuple
 
@@ -10,6 +11,7 @@ from components import (
     __version__,
     __author__,
     __author_email__,
+    Scene,
 )
 
 app = typer.Typer()
@@ -62,6 +64,14 @@ def build(ver: VersionType | None = None) -> None:
         version = bump_version(__version__, ver)
         with open("src/components/__version__.py", "w") as f:
             f.write(get_version_str(version=version))
+
+
+@app.command()
+def generate_scene(filename: str) -> None:
+    scene = Scene()
+    scene.create_player(x=10, y=10)
+    scene.create_enemy(x=20, y=20)
+    pickle.dump(scene, open(filename, "wb"))
 
 
 if __name__ == "__main__":
