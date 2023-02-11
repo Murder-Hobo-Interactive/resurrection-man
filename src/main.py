@@ -20,9 +20,9 @@ class App(Base):
         self._pyxel.init(self.GAME_WIDTH, self.GAME_HEIGHT)
         self._pyxel.load(u.resource_path("resources.pyxres"))
         if build:
-            SceneLoader.load("scenes/create_scene.pickle")
+            SceneLoader.load("scenes/create_scene" + self.SCENE_EXT)
         else:
-            SceneLoader.load("scenes/default_scene.pickle")
+            SceneLoader.load("scenes/default_scene" + self.SCENE_EXT)
 
         # --------------------
         # leave this at the end of init (nothing under it will run)

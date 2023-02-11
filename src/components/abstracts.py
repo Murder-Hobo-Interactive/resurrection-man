@@ -13,11 +13,16 @@ class Base(ABC):
     # GAME_OBJECTS not const but I want to handle the access separately
     # the idea here is to make it look scary so I don't use it directly
     SCENE: Any
+    SCENE_EXT = ".pickle"
     BASE_BLOCK = 16
     GAME_WIDTH = 420
     GAME_HEIGHT = 260
 
     _pyxel = PyxelFactory.create()
+
+    @staticmethod
+    def remove_first() -> None:
+        Base.SCENE.pop(0)
 
     @staticmethod
     def set_scene(scene: Any) -> None:

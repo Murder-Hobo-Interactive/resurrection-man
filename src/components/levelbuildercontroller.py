@@ -1,3 +1,4 @@
+import pickle
 from typing import List, Any, Callable
 from .types import Args, Kwargs, EdgeBehavior
 from .abstracts import (
@@ -45,6 +46,7 @@ class LevelBuilderController(AbstractController):
         self.buildable: List[Callable] = [EnemyFactory.create, PlayerFactory.create]
         self.current_obj: AbstractActor = self.buildable[0]()
         self.i = 0
+        self.outfilename = "new_level" + self.SCENE_EXT
 
     def update(self):
         if not self.actor:
@@ -56,6 +58,10 @@ class LevelBuilderController(AbstractController):
 
         if self._pyxel.btnp(self._pyxel.MOUSE_BUTTON_LEFT):
             Base.add_game_object(self.buildable[self.i](x=self.actor.x, y=self.actor.y))
+
+        if self._pyxel.btnp(self._pyxel.KEY_Q):
+            Base.remove_first()
+            pickle.dump(Base.SCENE, open(self.outfilename, "wb"))
 
     def draw(self):
         self.current_obj.preview(self.actor.x, self.actor.y)

@@ -57,6 +57,9 @@ class Scene(Base):
     def append(self, game_object: Base) -> None:
         self.game_objects.append(game_object)
 
+    def pop(self, x):
+        self.game_objects.pop(x)
+
 
 class SceneLoader(Base):
     @staticmethod
