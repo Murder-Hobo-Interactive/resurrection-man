@@ -30,5 +30,7 @@ class BulletFactory(Base):
         # creating a footgun for myself later when those args shouldn't be the same
         pc = ProjectileController(dir=dir)
         cls.add_game_object(
-            Bullet(pc, x=x, y=y, speed=speed, edge_behavior=EdgeBehavior.destroy)
+            Bullet(
+                controller=pc, x=x, y=y, speed=speed, edge_behavior=EdgeBehavior.destroy
+            )
         )

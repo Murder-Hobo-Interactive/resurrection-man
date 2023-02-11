@@ -51,13 +51,20 @@ class Enemy(AbstractActor):
 
 class EnemyFactory(Base):  # todo: probably implement a base factory class
     @classmethod
-    def create(cls, *args: Args, **kwargs: Kwargs) -> Enemy:
+    def create(
+        cls,
+        x: int = 0,
+        y: int = 0,
+        controller: Any = None,  # figure out how to change this Any to AbstractController
+        *args: Args,
+        **kwargs: Kwargs
+    ) -> Enemy:
         aiInput = AIController(*args, **kwargs)
         move_fsm = MoveAndPauseFSM(60)
         return Enemy(
             controller=aiInput,
-            x=cls.GAME_WIDTH // 2,
-            y=cls.GAME_HEIGHT // 2,
+            x=x,
+            y=y,
             fsm=move_fsm,
         )
 

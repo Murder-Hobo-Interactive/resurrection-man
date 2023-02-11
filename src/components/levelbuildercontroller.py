@@ -3,6 +3,7 @@ from .types import Args, Kwargs, EdgeBehavior
 from .abstracts import (
     AbstractActor,
     AbstractController,
+    Base,
 )
 from .utils import clamp
 from .enemy import EnemyFactory
@@ -42,7 +43,7 @@ class LevelBuilderController(AbstractController):
     def __init__(self, *args, **kwargs):
         self.actor: AbstractActor
         self.buildable: List[Callable] = [EnemyFactory.create, PlayerFactory.create]
-        self.current_obj: AbstractActor = self.buildable[0]
+        self.current_obj: AbstractActor = self.buildable[0]()
         self.i = 0
 
     def update(self):
@@ -53,8 +54,8 @@ class LevelBuilderController(AbstractController):
             self.i = (self.i + i_change) % len(self.buildable)
             self.current_obj = self.buildable[self.i]()
 
-        # if self._pyxel.btnp(self._pyxel.MOUSE_LEFT_BUTTON):
-        #     self._current_creator()
+        if self._pyxel.btnp(self._pyxel.MOUSE_BUTTON_LEFT):
+            Base.add_game_object(self.buildable[self.i](x=self.actor.x, y=self.actor.y))
 
     def draw(self):
         self.current_obj.preview(self.actor.x, self.actor.y)
