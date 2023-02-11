@@ -5,6 +5,7 @@ from .abstracts import Base
 from .player import PlayerFactory
 from .enemy import EnemyFactory
 from .keyboardcontroller import KeyboardController
+from .levelbuildercontroller import LevelBuilderController, Cursor
 
 
 class Background(Base):
@@ -40,6 +41,9 @@ class Scene(Base):
     def create_n_enemies(self, n: int) -> None:
         for _ in range(n):
             self.create_enemy()
+
+    def create_cursor(self, *args: Args, **kwargs: Kwargs) -> None:
+        self.append(Cursor(controller=LevelBuilderController()))
 
     def update(self) -> None:
         for each in self.game_objects:

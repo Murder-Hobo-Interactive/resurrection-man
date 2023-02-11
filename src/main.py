@@ -13,20 +13,22 @@ from components import (
 )
 import os
 import sys
+import typer
+
+cli = typer.Typer()
 
 
 class App(Base):
-    def __init__(self, *args: Args, **kwargs: Kwargs) -> None:
+    def __init__(self, build=False, *args: Args, **kwargs: Kwargs) -> None:
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server
         self._pyxel.init(self.GAME_WIDTH, self.GAME_HEIGHT)
         self._pyxel.load(u.resource_path("resources.pyxres"))
-
-        # self.scene = Scene()
-        # self.scene.create_player(x=10, y=10)
-        # self.scene.create_enemy(x=20, y=20)
-        SceneLoader.load("scenes/default_scene.pickle")
+        if build:
+            SceneLoader.load("scenes/create_scene.pickle")
+        else:
+            SceneLoader.load("scenes/default_scene.pickle")
 
         # todo: put add_game_object in a populate method, for generating multiple enemies
 
@@ -46,5 +48,10 @@ class App(Base):
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
 
+@cli.command()
+def default(build: bool = False):
+    App(build=build)
+
+
 if __name__ == "__main__":
-    App()
+    cli()

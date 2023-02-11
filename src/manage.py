@@ -12,6 +12,8 @@ from components import (
     __author__,
     __author_email__,
     Scene,
+    Cursor,
+    LevelBuilderController,
 )
 
 app = typer.Typer()
@@ -71,6 +73,14 @@ def generate_scene(filename: str) -> None:
     scene = Scene()
     scene.create_player(x=10, y=10)
     scene.create_enemy(x=20, y=20)
+    pickle.dump(scene, open(filename, "wb"))
+
+
+@app.command()
+def generate_scene_builder(filename: str) -> None:
+    scene = Scene()
+    scene.create_player(x=10, y=10)
+    scene.create_cursor(x=20, y=20)
     pickle.dump(scene, open(filename, "wb"))
 
 
