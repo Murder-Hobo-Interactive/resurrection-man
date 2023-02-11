@@ -116,6 +116,11 @@ class AbstractActor(Base):
     def draw(self) -> None:
         self._pyxel.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
 
+    @classmethod
+    def preview(cls, x: int, y: int):
+        # maybe make it flash when previewing or some visual indication that it isn't placed
+        cls._pyxel.blt(x, y, 0, cls.U, cls.V, cls.w, cls.h, 14)
+
 
 class AbstractController(Base):
     def register(self, actor: AbstractActor, *args: Args, **kwargs: Kwargs) -> None:
