@@ -1,11 +1,11 @@
 from typing import List, Any, Callable
 from .types import Args, Kwargs, EdgeBehavior
 from .abstracts import (
-    Base,
     AbstractActor,
     AbstractController,
-    AbstractFiniteStateMachine,
 )
+from .enemy import EnemyFactory
+from .player import PlayerFactory
 
 
 class Cursor(AbstractActor):
@@ -30,20 +30,31 @@ class Cursor(AbstractActor):
     def update(self):
         self.x = self._pyxel.mouse_x
         self.y = self._pyxel.mouse_y
+        self.controller.update()
 
     def draw(self):
         self._pyxel.blt(self.x - 8, self.y - 8, 0, self.U, self.V, self.w, self.h, 14)
+        self.controller.draw()
 
 
 class LevelBuilderController(AbstractController):
     def __init__(self, *args, **kwargs):
         self.actor: AbstractActor
-        self.creators: List[Callable] = []
-        self._current_creator: Callable
+        self.buildable: List[Callable] = [EnemyFactory.create, PlayerFactory.create]
+        self.current_obj: AbstractActor = self.buildable[0]()
+        self.i = 0
 
     def update(self):
         if not self.actor:
             return
+        i_change = self._pyxel.mouse_wheel
+        if i_change:
+            self.i += i_change % len(self.buildable)
+            self.current_obj = self.buildable[self.i]()
+
+        # if self._pyxel.btnp(self._pyxel.MOUSE_LEFT_BUTTON):
+        #     self._current_creator()
 
     def draw(self):
+        self.current_obj.draw()
         pass

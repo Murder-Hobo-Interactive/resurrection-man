@@ -43,7 +43,8 @@ class Scene(Base):
             self.create_enemy()
 
     def create_cursor(self, *args: Args, **kwargs: Kwargs) -> None:
-        self.append(Cursor(controller=LevelBuilderController()))
+        lbc = LevelBuilderController()
+        self.append(Cursor(controller=lbc))
 
     def update(self) -> None:
         for each in self.game_objects:

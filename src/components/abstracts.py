@@ -61,6 +61,10 @@ class Decorators:
 
 
 class AbstractActor(Base):
+    """
+    Abstract class for all actors in the game
+    """
+
     # U, V default to 0 for the default sprite
     # this will make it easy to debug when something is visible when it shouldn't be
     U = 0
@@ -70,12 +74,12 @@ class AbstractActor(Base):
 
     def __init__(
         self,
+        *args: Args,
         controller: Any = None,  # figure out how to change this Any to AbstractController
         x: int = 0,
         y: int = 0,
         speed: int = 0,
         edge_behavior: EdgeBehavior = EdgeBehavior.stop,
-        *args: Args,
         **kwargs: Kwargs
     ) -> None:
         self.controller = controller

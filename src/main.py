@@ -1,18 +1,12 @@
 from typing import Any
 from components import (
     Base,
-    KeyboardController,
-    Player,
-    EnemyFactory,
     constants as c,
     utils as u,
-    Scene,
     SceneLoader,
     Args,
     Kwargs,
 )
-import os
-import sys
 import typer
 
 cli = typer.Typer()
@@ -30,8 +24,6 @@ class App(Base):
         else:
             SceneLoader.load("scenes/default_scene.pickle")
 
-        # todo: put add_game_object in a populate method, for generating multiple enemies
-
         # --------------------
         # leave this at the end of init (nothing under it will run)
         self._pyxel.run(self.update, self.draw)
@@ -41,7 +33,7 @@ class App(Base):
             x.update()
 
     def draw(self) -> None:
-        self._pyxel.cls(0)
+        self._pyxel.cls(0)  # clear screen
         for x in self.get_game_objects():
             x.draw()
 
