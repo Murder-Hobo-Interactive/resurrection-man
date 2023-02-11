@@ -50,11 +50,11 @@ class LevelBuilderController(AbstractController):
             return
         i_change = clamp(self._pyxel.mouse_wheel, -1, 1)
         if i_change:
-            self.i = (self.i + i_change) % len(self.buildable)-1
+            self.i = (self.i + i_change) % len(self.buildable)
             self.current_obj = self.buildable[self.i]()
 
         # if self._pyxel.btnp(self._pyxel.MOUSE_LEFT_BUTTON):
         #     self._current_creator()
 
     def draw(self):
-        self.current_obj.preview(self.actor.x, self.actor.y )
+        self.current_obj.preview(self.actor.x, self.actor.y)
