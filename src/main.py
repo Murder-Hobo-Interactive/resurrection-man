@@ -19,6 +19,7 @@ class App(Base):
         # or run headless as a game server
         self._pyxel.init(self.GAME_WIDTH, self.GAME_HEIGHT)
         self._pyxel.load(u.resource_path("resources.pyxres"))
+        # todo: make these configurable
         if build:
             SceneLoader.load("scenes/create_scene" + self.SCENE_EXT)
         else:

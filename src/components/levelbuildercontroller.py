@@ -46,7 +46,7 @@ class LevelBuilderController(AbstractController):
         self.buildable: List[Callable] = [EnemyFactory.create, PlayerFactory.create]
         self.current_obj: AbstractActor = self.buildable[0]()
         self.i = 0
-        self.outfilename = "new_level" + self.SCENE_EXT
+        self.outfilename = "scenes/new_level" + self.SCENE_EXT
 
     def update(self):
         if not self.actor:
@@ -62,6 +62,7 @@ class LevelBuilderController(AbstractController):
         if self._pyxel.btnp(self._pyxel.KEY_Q):
             Base.remove_first()
             pickle.dump(Base.SCENE, open(self.outfilename, "wb"))
+            self._pyxel.quit()
 
     def draw(self):
         self.current_obj.preview(self.actor.x, self.actor.y)
