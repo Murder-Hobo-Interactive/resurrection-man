@@ -13,7 +13,7 @@ cli = typer.Typer()
 
 
 class App(Base):
-    def __init__(self, build=False, *args: Args, **kwargs: Kwargs) -> None:
+    def __init__(self, build: bool = False, *args: Args, **kwargs: Kwargs) -> None:
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server
@@ -42,7 +42,7 @@ class App(Base):
 
 
 @cli.command()
-def default(build: bool = False):
+def default(build: bool = False) -> None:
     App(build=build)
 
 

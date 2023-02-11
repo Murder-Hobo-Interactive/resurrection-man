@@ -122,7 +122,7 @@ class AbstractActor(Base):
         self._pyxel.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
 
     @classmethod
-    def preview(cls, x: int, y: int):
+    def preview(cls, x: int, y: int) -> None:
         # maybe make it flash when previewing or some visual indication that it isn't placed
         cls._pyxel.blt(x, y, 0, cls.U, cls.V, cls.w, cls.h, 14)
 

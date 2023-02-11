@@ -36,7 +36,7 @@ class Scene(Base):
     def create_enemy(
         self, x: int = 0, y: int = 0, *args: Args, **kwargs: Kwargs
     ) -> None:
-        self.append(EnemyFactory.create(*args, **kwargs))
+        self.append(EnemyFactory.create(*args, **kwargs))  # type: ignore
 
     def create_n_enemies(self, n: int) -> None:
         for _ in range(n):
@@ -57,7 +57,7 @@ class Scene(Base):
     def append(self, game_object: Base) -> None:
         self.game_objects.append(game_object)
 
-    def pop(self, x):
+    def pop(self, x: int) -> None:
         self.game_objects.pop(x)
 
 
