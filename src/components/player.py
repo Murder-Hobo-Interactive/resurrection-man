@@ -21,8 +21,8 @@ class PlayerFactory(Base):
     @classmethod
     def create(
         cls,
-        x: int,
-        y: int,
+        x: int=0,
+        y: int=0,
         controller: Any = None,  # figure out how to change this Any to AbstractController
         *args: Args,
         **kwargs: Kwargs

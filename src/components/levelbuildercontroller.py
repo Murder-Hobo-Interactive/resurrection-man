@@ -4,6 +4,7 @@ from .abstracts import (
     AbstractActor,
     AbstractController,
 )
+from .utils import clamp
 from .enemy import EnemyFactory
 from .player import PlayerFactory
 
@@ -41,19 +42,19 @@ class LevelBuilderController(AbstractController):
     def __init__(self, *args, **kwargs):
         self.actor: AbstractActor
         self.buildable: List[Callable] = [EnemyFactory.create, PlayerFactory.create]
-        self.current_obj: AbstractActor = self.buildable[0]()
+        self.current_obj: AbstractActor = self.buildable[0]
         self.i = 0
 
     def update(self):
         if not self.actor:
             return
-        i_change = self._pyxel.mouse_wheel
+        i_change = clamp(self._pyxel.mouse_wheel, -1, 1)
         if i_change:
-            self.i += i_change % len(self.buildable)
+            self.i = (self.i + i_change) % len(self.buildable)-1
             self.current_obj = self.buildable[self.i]()
 
         # if self._pyxel.btnp(self._pyxel.MOUSE_LEFT_BUTTON):
         #     self._current_creator()
 
     def draw(self):
-        self.current_obj.preview()
+        self.current_obj.preview(self.actor.x, self.actor.y )
