@@ -56,5 +56,4 @@ class LevelBuilderController(AbstractController):
         #     self._current_creator()
 
     def draw(self):
-        self.current_obj.draw()
-        pass
+        self.current_obj.preview()
