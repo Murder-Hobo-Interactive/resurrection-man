@@ -43,7 +43,7 @@ WSL causes more problems than its worth, use native dev tools if you're using Wi
 
 # uml
 `make uml`
-
+- ![uml reference](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/)
 might require graphviz
 
 `brew install graphviz`
