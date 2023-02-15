@@ -21,22 +21,20 @@ class PlayerFactory(Base):
     @classmethod
     def create(
         cls,
-        x: int,
-        y: int,
+        x: int = 0,
+        y: int = 0,
         controller: Any = None,  # figure out how to change this Any to AbstractController
         *args: Args,
         **kwargs: Kwargs
     ) -> Player:
         keyboardInput = KeyboardController(*args, **kwargs)
-        # there might be a reason to consider keeping the player object at index 0 ?
+        # there might be a reason to consider keeping the player object at index 0 in the game objects list?
 
         return Player(controller=keyboardInput, x=x, y=y)
 
 
 if __name__ == "__main__":
     # this acts as a minimal test mostly to catch any type errors more easily
-    from .keyboardcontroller import KeyboardController
-    from .pyxelfactory import PyxelFactory
 
     c = KeyboardController()
     e = Player(controller=c)

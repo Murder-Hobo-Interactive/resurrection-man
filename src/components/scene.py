@@ -5,6 +5,7 @@ from .abstracts import Base
 from .player import PlayerFactory
 from .enemy import EnemyFactory
 from .keyboardcontroller import KeyboardController
+from .levelbuildercontroller import LevelBuilderController, Cursor
 
 
 class Background(Base):
@@ -35,11 +36,15 @@ class Scene(Base):
     def create_enemy(
         self, x: int = 0, y: int = 0, *args: Args, **kwargs: Kwargs
     ) -> None:
-        self.append(EnemyFactory.create(*args, **kwargs))
+        self.append(EnemyFactory.create(*args, **kwargs))  # type: ignore
 
     def create_n_enemies(self, n: int) -> None:
         for _ in range(n):
             self.create_enemy()
+
+    def create_cursor(self, *args: Args, **kwargs: Kwargs) -> None:
+        lbc = LevelBuilderController()
+        self.append(Cursor(controller=lbc))
 
     def update(self) -> None:
         for each in self.game_objects:
@@ -51,6 +56,9 @@ class Scene(Base):
 
     def append(self, game_object: Base) -> None:
         self.game_objects.append(game_object)
+
+    def pop(self, x: int) -> None:
+        self.game_objects.pop(x)
 
 
 class SceneLoader(Base):

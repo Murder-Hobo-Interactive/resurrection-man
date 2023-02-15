@@ -13,11 +13,16 @@ class Base(ABC):
     # GAME_OBJECTS not const but I want to handle the access separately
     # the idea here is to make it look scary so I don't use it directly
     SCENE: Any
+    SCENE_EXT = ".pickle"
     BASE_BLOCK = 16
     GAME_WIDTH = 420
     GAME_HEIGHT = 260
 
     _pyxel = PyxelFactory.create()
+
+    @staticmethod
+    def remove_first() -> None:
+        Base.SCENE.pop(0)
 
     @staticmethod
     def set_scene(scene: Any) -> None:
@@ -61,6 +66,10 @@ class Decorators:
 
 
 class AbstractActor(Base):
+    """
+    Abstract class for all actors in the game
+    """
+
     # U, V default to 0 for the default sprite
     # this will make it easy to debug when something is visible when it shouldn't be
     U = 0
@@ -70,12 +79,12 @@ class AbstractActor(Base):
 
     def __init__(
         self,
+        *args: Args,
         controller: Any = None,  # figure out how to change this Any to AbstractController
         x: int = 0,
         y: int = 0,
         speed: int = 0,
         edge_behavior: EdgeBehavior = EdgeBehavior.stop,
-        *args: Args,
         **kwargs: Kwargs
     ) -> None:
         self.controller = controller
@@ -111,6 +120,11 @@ class AbstractActor(Base):
 
     def draw(self) -> None:
         self._pyxel.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
+
+    @classmethod
+    def preview(cls, x: int, y: int) -> None:
+        # maybe make it flash when previewing or some visual indication that it isn't placed
+        cls._pyxel.blt(x, y, 0, cls.U, cls.V, cls.w, cls.h, 14)
 
 
 class AbstractController(Base):

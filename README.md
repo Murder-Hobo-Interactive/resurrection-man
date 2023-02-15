@@ -35,6 +35,11 @@ WSL causes more problems than its worth, use native dev tools if you're using Wi
 
 - `make run`
 
+# Scene Builder
+- `make scene-builder`
+    - left click: place actors
+    - mouse scroll: change selected actor
+    - q: quit and save to `new_level.pickle`
 # editing assets
 `make edit`
 
@@ -43,6 +48,8 @@ WSL causes more problems than its worth, use native dev tools if you're using Wi
 
 # uml
 `make uml`
+
+- [uml reference](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/)
 
 might require graphviz
 

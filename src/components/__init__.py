@@ -6,6 +6,7 @@ from .aicontroller import AIController
 from .enemy import Enemy, EnemyFactory
 from .types import Args, Kwargs, Direction
 from .scene import Scene, SceneLoader
+from .levelbuildercontroller import LevelBuilderController, Cursor
 
 # todo get pylance to not be mad about this
 # Import ".projectilecontroller" could not be resolvedPylance
