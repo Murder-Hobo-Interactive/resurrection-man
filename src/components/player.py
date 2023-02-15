@@ -2,6 +2,7 @@ from typing import Any
 from .abstracts import AbstractActor, Base
 from .types import Args, Kwargs
 from .keyboardcontroller import KeyboardController
+from equipable import Equipable
 
 
 class Player(AbstractActor):
@@ -9,6 +10,26 @@ class Player(AbstractActor):
     V = 64
     w = AbstractActor.BASE_BLOCK * 2
     h = AbstractActor.BASE_BLOCK * 2
+    def __init__(
+        self,
+        *args: Args,
+        controller: Any = None,  # figure out how to change this Any to AbstractController
+        x: int = 0,
+        y: int = 0,
+        speed: int = 0,
+        edge_behavior: EdgeBehavior = EdgeBehavior.stop,
+        **kwargs: Kwargs
+    ) -> None:
+        self.controller = controller
+        self.x = x
+        self.y = y
+        self.speed = speed
+        self.controller.register(self)
+        # todo: maybe add different config for looping screen
+        # or leaving screen
+        self.edge_behavior: EdgeBehavior = edge_behavior
+        self.weapon_slot: Equipable
+
 
     def update(self) -> None:
         self.controller.update()

@@ -64,7 +64,10 @@ class Decorators:
 
         return _wrapper
 
-
+class AbstractItem(Base):
+    def __init__(self):
+        pass
+        
 class AbstractActor(Base):
     """
     Abstract class for all actors in the game
