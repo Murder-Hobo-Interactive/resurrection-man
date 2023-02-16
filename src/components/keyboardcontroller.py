@@ -41,6 +41,7 @@ class KeyboardController(AbstractController):
         }
         for key, direction in key_to_bullet_direction.items():
             if self._pyxel.btn(key):
-                BulletFactory.create(
-                    self.actor.x, self.actor.y, direction, speed=bullet_speed
+                if (self.actor.weapon_slot.fire()):
+                    BulletFactory.create(
+                        self.actor.x, self.actor.y, direction, speed=bullet_speed
                 )
