@@ -32,15 +32,9 @@ class QuadTree(Base):
 
     def which_coord(self, actor: AbstractActor) -> int:
         if actor.x < self.center[0]:
-            if actor.y < self.center[1]:
-                return 0
-            else:
-                return 2
+            return 0 if actor.y < self.center[1] else 2
         else:
-            if actor.y < self.center[1]:
-                return 1
-            else:
-                return 3
+            return 1 if actor.y < self.center[1] else 3
 
     def add(self, actor: AbstractActor) -> None:
         i = self.which_coord(actor)
