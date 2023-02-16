@@ -15,8 +15,10 @@ class Base(ABC):
     SCENE: Any
     SCENE_EXT = ".pickle"
     BASE_BLOCK = 16
-    GAME_WIDTH = 420
-    GAME_HEIGHT = 260
+    GAME_WIDTH = BASE_BLOCK * 32
+    GAME_HEIGHT = GAME_WIDTH
+    VIEWPORT_WIDTH = 420
+    VIEWPORT_HEIGHT = 260
 
     _pyxel = PyxelFactory.create()
 
