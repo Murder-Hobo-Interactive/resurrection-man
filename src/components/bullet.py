@@ -13,6 +13,9 @@ class Bullet(AbstractActor):
     def update(self) -> None:
         self.controller.update()
 
+    def collision_check(self) -> bool:
+        return False
+
 
 class BulletFactory(Base):
     @classmethod

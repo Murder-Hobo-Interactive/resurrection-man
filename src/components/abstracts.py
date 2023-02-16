@@ -64,10 +64,15 @@ class Decorators:
 
         return _wrapper
 
+
 class AbstractItem(Base):
-    def __init__(self):
+    def __init__(self) -> None:
         pass
-        
+
+    def use(self) -> bool:
+        return True
+
+
 class AbstractActor(Base):
     """
     Abstract class for all actors in the game
@@ -79,6 +84,7 @@ class AbstractActor(Base):
     V = 0
     w = Base.BASE_BLOCK
     h = Base.BASE_BLOCK
+    weapon_slot: AbstractItem
 
     def __init__(
         self,

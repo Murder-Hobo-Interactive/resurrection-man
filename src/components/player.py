@@ -3,7 +3,11 @@ from .abstracts import AbstractActor, Base
 from .types import Args, Kwargs
 from .keyboardcontroller import KeyboardController
 from .equipable import Gun
-from .types import Args, Kwargs, EdgeBehavior #Imported this because Player __init__ references EdgeBehavior
+from .types import (
+    Args,
+    Kwargs,
+    EdgeBehavior,
+)  # Imported this because Player __init__ references EdgeBehavior
 
 
 class Player(AbstractActor):
@@ -12,6 +16,7 @@ class Player(AbstractActor):
     w = AbstractActor.BASE_BLOCK * 2
     h = AbstractActor.BASE_BLOCK * 2
     weapon_slot = Gun()
+
     def __init__(
         self,
         *args: Args,
@@ -30,12 +35,10 @@ class Player(AbstractActor):
         # todo: maybe add different config for looping screen
         # or leaving screen
         self.edge_behavior: EdgeBehavior = edge_behavior
-        
-
 
     def update(self) -> None:
         self.controller.update()
-        self.weapon_slot.update() #Update the Player's Weapon Slot too
+        self.weapon_slot.update()  # Update the Player's Weapon Slot too
 
     def draw(self) -> None:
         self._pyxel.blt(self.x, self.y, 0, self.U, self.V, self.w, self.h, 14)
