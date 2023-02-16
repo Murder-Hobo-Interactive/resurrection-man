@@ -10,7 +10,7 @@ from .levelbuildercontroller import LevelBuilderController, Cursor
 QuadChild = Union["QuadTree", AbstractActor]
 
 
-class QuadTree:  # does this need to inherit anything?
+class QuadTree(Base):
     def __init__(self, actor_list: List[AbstractActor]) -> None:
         # if self.parent is None then we're at the root
         self.parent: QuadTree | None = None
