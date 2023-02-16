@@ -1,54 +1,50 @@
 from typing import Any
 from components import (
-    KeyboardController,
-    Player,
-    PyxelFactory,
-    EnemyFactory,
+    Base,
     constants as c,
     utils as u,
+    SceneLoader,
     Args,
     Kwargs,
 )
-import os
-import sys
+import typer
+
+cli = typer.Typer()
 
 
-class App:
-    def __init__(self, *args: Args, **kwargs: Kwargs) -> None:
+class App(Base):
+    def __init__(self, build: bool = False, *args: Args, **kwargs: Kwargs) -> None:
         # inversion of control of pyxel so that later
         # it's easy to either fake it for testing
         # or run headless as a game server
-        self._pyxel = PyxelFactory.create(*args, **kwargs)
-        self._pyxel.init(420, 260)
-
-        # make a player entity
-        keyboardInput = KeyboardController(self._pyxel, *args, **kwargs)
-        self.player = Player(keyboardInput, self._pyxel, *args, **kwargs)
-
-        self.gameObjects = []  # todo: this will eventually get moved to scenes objects
-        self.gameObjects.append(
-            EnemyFactory.create(self._pyxel, *args, **kwargs)
-        )  # todo: put this in a populate method
-
+        self._pyxel.init(self.GAME_WIDTH, self.GAME_HEIGHT)
         self._pyxel.load(u.resource_path("resources.pyxres"))
+        # todo: make these configurable
+        if build:
+            SceneLoader.load("scenes/create_scene" + self.SCENE_EXT)
+        else:
+            SceneLoader.load("scenes/default_scene" + self.SCENE_EXT)
 
         # --------------------
         # leave this at the end of init (nothing under it will run)
         self._pyxel.run(self.update, self.draw)
 
     def update(self) -> None:
-        self.player.update()
-        for x in self.gameObjects:
+        for x in self.get_game_objects():
             x.update()
 
     def draw(self) -> None:
-        self._pyxel.cls(0)
-        self.player.draw()
-        for x in self.gameObjects:
+        self._pyxel.cls(0)  # clear screen
+        for x in self.get_game_objects():
             x.draw()
 
         c.pyxel.text(35, 66, "Resurrection Man", c.pyxel.frame_count % 16)
 
 
+@cli.command()
+def default(build: bool = False) -> None:
+    App(build=build)
+
+
 if __name__ == "__main__":
-    App()
+    cli()

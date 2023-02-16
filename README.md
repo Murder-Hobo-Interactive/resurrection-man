@@ -2,18 +2,18 @@
 grave robbing and other fun things
 
 # dependencies
-[pyenv](https://github.com/pyenv/pyenv#automatic-installer)
+- [pyenv](https://github.com/pyenv/pyenv#automatic-installer)
 
-[pipenv](https://pipenv.pypa.io/en/latest/)
+- [pipenv](https://pipenv.pypa.io/en/latest/)
 
-`python -m pip install pipenv`
+- `python -m pip install pipenv`
 (This installs pip which will later be used to set up pipenv. Try not to confuse the commands via terminal history like amp did)
 
-[make](https://www.technewstoday.com/install-and-use-make-in-windows/)
+- [make](https://www.technewstoday.com/install-and-use-make-in-windows/)
 
-`winget install gnuwin32.make`
+- `winget install gnuwin32.make`
 
-don't forget to add make to the path in windows. example: `C:\Program Files (x86)\GnuWin32\bin`
+- don't forget to add make to the path in windows. example: `C:\Program Files (x86)\GnuWin32\bin`
 
 *on a real OS this isn't a problem, but on windows you gotta use gnumake*
 
@@ -21,22 +21,25 @@ don't forget to add make to the path in windows. example: `C:\Program Files (x86
 
 WSL causes more problems than its worth, use native dev tools if you're using Windows. [See this issue](https://github.com/Murder-Hobo-Interactive/resurrection-man/issues/15)
 
-*install the dependencies listed above*
+- *install the dependencies listed above*
 
-make sure that `python` is a valid command
+- make sure that `python` is a valid command
+    - In linux
+        - if not set alias in `.bashrc` and run `source ~/.bashrc` ->  *set alias in `.bashrc` on linux*
 
-if not set alias in `.bashrc` and run `source ~/.bashrc`
-
-*set alias in `.bashrc`*
-
-`alias python='python3'`
+        - `alias python='python3'`
 
 *install and run*
 
-`python -m pipenv install`
+- `python -m pipenv install`
 
-`make run`
+- `make run`
 
+# Scene Builder
+- `make scene-builder`
+    - left click: place actors
+    - mouse scroll: change selected actor
+    - q: quit and save to `new_level.pickle`
 # editing assets
 `make edit`
 
@@ -45,6 +48,8 @@ if not set alias in `.bashrc` and run `source ~/.bashrc`
 
 # uml
 `make uml`
+
+- [uml reference](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/uml-class-diagram-tutorial/)
 
 might require graphviz
 
@@ -58,17 +63,17 @@ or
 # Null Item
 U, V Coordinates: 0,0
 W: 16, H: 16
-Description: If nothing else, there is this item. Use as a placeholder. 
+Description: If nothing else, there is this item. Use as a placeholder.
 
 # Trap Item
 U, V Coordinates: 0,16
 W: 16, H: 16
-Description: Meant to be implemented as a stationary hazard. Use however you see fit. 
+Description: Meant to be implemented as a stationary hazard. Use however you see fit.
 
 # Tomb Stone
 U, V Coordinates: 0,32
 W: 16, H: 16
-Description: Has ressurection mans initials on it. Could be used for power ups, or just to show where they died. 
+Description: Has ressurection mans initials on it. Could be used for power ups, or just to show where they died.
 
 # Bullet Right
 U, V Coordinates: 0, 48
