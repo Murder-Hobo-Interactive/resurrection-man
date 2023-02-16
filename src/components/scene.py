@@ -1,11 +1,27 @@
 from pickle import dump as p_dump, load as p_load
-from typing import List, Any
+from typing import List, Any, List, Tuple, Union
 from .types import Args, Kwargs, Direction
-from .abstracts import Base
+from .abstracts import Base, AbstractActor
 from .player import PlayerFactory
 from .enemy import EnemyFactory
 from .keyboardcontroller import KeyboardController
 from .levelbuildercontroller import LevelBuilderController, Cursor
+
+QuadChild = Union["QuadTree", AbstractActor]
+
+
+class QuadTree:  # does this need to inherit anything?
+    def __init__(self, actor_list: List[AbstractActor]) -> None:
+        # if self.parent is None then we're at the root
+        self.parent: QuadTree | None = None
+        # 0: top left
+        # 1: top right
+        # 2: bottom left
+        # 3: bottom right
+        self.children: Tuple[QuadChild, QuadChild, QuadChild, QuadChild]
+
+    def add(self, actor: AbstractActor) -> None:
+        pass
 
 
 class Background(Base):
@@ -27,6 +43,7 @@ class Scene(Base):
         camera = None
         background = None
         self.game_objects: List[Any] = []
+        self.quadtree = QuadTree(self.game_objects)
 
     def create_player(
         self, x: int = 0, y: int = 0, *args: Args, **kwargs: Kwargs
@@ -47,10 +64,12 @@ class Scene(Base):
         self.append(Cursor(controller=lbc))
 
     def update(self) -> None:
+        self.check_for_collisions()
         for each in self.game_objects:
             each.update()
 
     def draw(self) -> None:
+        # todo: handle things like background that need to be drawn first
         for each in self.game_objects:
             each.draw()
 
@@ -59,6 +78,9 @@ class Scene(Base):
 
     def pop(self, x: int) -> None:
         self.game_objects.pop(x)
+
+    def check_for_collisions(self) -> None:
+        pass
 
 
 class SceneLoader(Base):
