@@ -7,21 +7,54 @@ from .enemy import EnemyFactory
 from .keyboardcontroller import KeyboardController
 from .levelbuildercontroller import LevelBuilderController, Cursor
 
-QuadChild = Union["QuadTree", AbstractActor]
+QuadChild = Union["QuadTree", AbstractActor] | None
 
 
 class QuadTree(Base):
-    def __init__(self, actor_list: List[AbstractActor]) -> None:
+    def __init__(
+        self,
+        actor_list: List[AbstractActor],
+        parent: "QuadTree" | None = None,
+        coords: Tuple[int, int, int, int] = (0, 0, 0, 0),  # x1, y1, x2, y2
+    ) -> None:
         # if self.parent is None then we're at the root
-        self.parent: QuadTree | None = None
+        self.parent = parent
+        # todo: initialize the children with the actor_list
         # 0: top left
         # 1: top right
         # 2: bottom left
         # 3: bottom right
         self.children: Tuple[QuadChild, QuadChild, QuadChild, QuadChild]
+        self.coords = coords
+        self.center = (self.coords[0] + self.coords[2]) // 2, (
+            self.coords[1] + self.coords[3]
+        ) // 2
+
+    def which_coord(self, actor: AbstractActor) -> int:
+        if actor.x < self.center[0]:
+            if actor.y < self.center[1]:
+                return 0
+            else:
+                return 2
+        else:
+            if actor.y < self.center[1]:
+                return 1
+            else:
+                return 3
 
     def add(self, actor: AbstractActor) -> None:
-        pass
+        i = self.which_coord(actor)
+        if self.children[i] and isinstance(self.children[i], QuadTree):
+            self.children[i].add(actor)
+        elif self.children[i] and isinstance(self.children[i], AbstractActor):
+            tmp = self.children[i]
+            self.children[i] = QuadTree(
+                [tmp, actor],
+                parent=self,
+                coords=self.coords,  # todo: gotta split them coords
+            )
+        else:
+            self.children[i] = actor
 
 
 class Background(Base):
