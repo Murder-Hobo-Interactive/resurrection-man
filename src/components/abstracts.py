@@ -72,6 +72,10 @@ class AbstractItem(Base):
     def use(self) -> bool:
         return True
 
+    @abstractmethod
+    def update(self) -> None:
+        ...
+
 
 class AbstractActor(Base):
     """
@@ -84,7 +88,6 @@ class AbstractActor(Base):
     V = 0
     w = Base.BASE_BLOCK
     h = Base.BASE_BLOCK
-    weapon_slot: AbstractItem
 
     def __init__(
         self,
@@ -104,6 +107,7 @@ class AbstractActor(Base):
         # todo: maybe add different config for looping screen
         # or leaving screen
         self.edge_behavior: EdgeBehavior = edge_behavior
+        self.weapon_slot: AbstractItem
 
     @Decorators.movement
     def move(self, x: int, y: int) -> None:

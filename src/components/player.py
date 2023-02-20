@@ -1,5 +1,5 @@
 from typing import Any
-from .abstracts import AbstractActor, Base
+from .abstracts import AbstractActor, Base, AbstractItem
 from .types import Args, Kwargs
 from .keyboardcontroller import KeyboardController
 from .equipable import Gun
@@ -15,7 +15,6 @@ class Player(AbstractActor):
     V = 64
     w = AbstractActor.BASE_BLOCK * 2
     h = AbstractActor.BASE_BLOCK * 2
-    weapon_slot = Gun()
 
     def __init__(
         self,
@@ -35,6 +34,7 @@ class Player(AbstractActor):
         # todo: maybe add different config for looping screen
         # or leaving screen
         self.edge_behavior: EdgeBehavior = edge_behavior
+        self.weapon_slot: AbstractItem = Gun()
 
     def update(self) -> None:
         self.controller.update()
