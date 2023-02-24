@@ -13,9 +13,11 @@ grave robbing and other fun things
 
 - `winget install gnuwin32.make`
 
-- don't forget to add make to the path in windows. example: `C:\Program Files (x86)\GnuWin32\bin`
+- don't forget to add make to the path in windows. example: `C:\Program Files (x86)\GnuWin32\bin` *on a real OS this isn't a problem, but on windows you gotta use gnumake*
 
-*on a real OS this isn't a problem, but on windows you gotta use gnumake*
+- Watchman (for pyre type checking):
+    - macOS: `brew install watchman`
+    - ubuntu: `sudo apt-get install watchman`
 
 # getting started
 

@@ -12,6 +12,7 @@ pre-commit = "*"
 colorama = "*"
 pyinstaller = "*"
 typer = {extras = ["all"], version = "*"}
+pyre-check = "*"
 
 [dev-packages]
 
