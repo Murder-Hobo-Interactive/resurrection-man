@@ -67,6 +67,18 @@ class Decorators:
         return _wrapper
 
 
+class AbstractItem(Base):
+    def __init__(self) -> None:
+        pass
+
+    def use(self) -> bool:
+        return True
+
+    @abstractmethod
+    def update(self) -> None:
+        ...
+
+
 class AbstractActor(Base):
     """
     Abstract class for all actors in the game
@@ -97,6 +109,7 @@ class AbstractActor(Base):
         # todo: maybe add different config for looping screen
         # or leaving screen
         self.edge_behavior: EdgeBehavior = edge_behavior
+        self.weapon_slot: AbstractItem
 
     @Decorators.movement
     def move(self, x: int, y: int) -> None:
